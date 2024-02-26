@@ -5,10 +5,10 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `Metal and Water`,
-    description: ``,
-    author: ``,
-    siteUrl: ``,
-    keywords: ``,
+    description: `The new official website for Metal and Water`,
+    author: `@metalandwater`,
+    siteUrl: `https://www.metalwater.co`,
+    keywords: `art, dance, culture`,
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -33,7 +33,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: ``, // This path is relative to the root of the site.
+        icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
     },
     {
