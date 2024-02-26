@@ -1,0 +1,60 @@
+{
+  "name": "gatsby-starter-default",
+  "private": true,
+  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "version": "0.1.0",
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@googlemaps/react-wrapper": "^1.1.35",
+    "@table-library/react-table-library": "^4.0.23",
+    "@vimeo/player": "^2.18.0",
+    "framer-motion": "^7.6.19",
+    "gatsby": "^5.2.0",
+    "gatsby-plugin-google-gtag": "^5.9.0",
+    "gatsby-plugin-image": "^3.5.0",
+    "gatsby-plugin-manifest": "^5.2.0",
+    "gatsby-plugin-netlify": "^5.1.0",
+    "gatsby-plugin-sharp": "^5.2.0",
+    "gatsby-source-contentful": "^8.2.0",
+    "gatsby-source-filesystem": "^5.2.0",
+    "gatsby-transformer-remark": "^6.5.0",
+    "gatsby-transformer-sharp": "^5.2.0",
+    "google-map-react": "^2.2.0",
+    "isomorphic-fetch": "^3.0.0",
+    "react": "^18.2.0",
+    "react-awesome-reveal": "^4.2.5",
+    "react-calendar": "^4.0.0",
+    "react-dom": "^18.2.0",
+    "react-h5-audio-player": "^3.8.6",
+    "react-icons": "^4.10.1",
+    "react-player": "^2.11.0",
+    "react-slick": "^0.29.0",
+    "react-tooltip": "^5.21.1",
+    "slick-carousel": "^1.8.1",
+    "vimeo": "^2.1.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "0BSD",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  }
+}
