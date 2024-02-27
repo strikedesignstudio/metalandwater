@@ -2,12 +2,12 @@ import React from 'react'
 import Header from './header'
 import Footer from './footer'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location }) => {
   return (
     <>
       <Header></Header>
       <main>{children}</main>
-      <Footer></Footer>
+      {location?.pathname !== '/' && <Footer></Footer>}
     </>
   )
 }
