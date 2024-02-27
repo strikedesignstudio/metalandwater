@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+@font-face {
+  font-family: 'FK Grotesk';
+  src: url(./FKGroteskNeueTrial-Medium.otf);
+  font-weight: 600;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +14,7 @@
 }
 
 :root {
-  --font-primary: 'Roboto', sans-serif;
+  --font-primary: 'FK Grotesk', 'Roboto', sans-serif;
   --font-lg-resp: calc(1rem + 1.5vw);
   --font-md-resp: calc(1rem + 1vw);
   --font-sm-resp: clamp(8px, calc(0.75rem + 0.5vw), 18px);
@@ -257,7 +264,6 @@ header li {
   .navbar ul li a {
     display: inline-block;
     margin-left: 50px;
-    font-family: 'antique', sans-serif;
   }
 }
 
@@ -289,11 +295,9 @@ footer a {
   display: block;
 }
 
-
 .footer-logo {
   font-size: var(--font-md);
 }
-
 
 @media screen and (max-width: 860px) {
   footer {
@@ -303,7 +307,6 @@ footer a {
   footer div {
     width: 100%;
   }
-
 }
 
 /*
