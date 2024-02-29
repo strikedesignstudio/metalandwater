@@ -2261,3 +2261,22 @@ Single News Page
   transform: translate(-50%, -50%);
   border: none;
 }
+
+.home-slider-container {
+  width: 100vw;
+}
+
+.home-slide-container {
+  position: relative;
+  width: 100%;
+}
+
+.home-slide-image {
+  width: 100%;
+}
+
+.image-overlay {
+  position: absolute;
+  z-index: 10;
+  opacity: 0.5;
+}

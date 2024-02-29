@@ -1,12 +1,12 @@
 import React from 'react'
 import Seo from '../components/seo'
 import Layout from '../components/layout'
-import HomeVideo from '../components/homeVideo'
+import HomeSlider from '../components/homeSlider'
 
 const Index = ({ location }) => {
   return (
     <Layout location={location}>
-      <HomeVideo />
+      <HomeSlider />
     </Layout>
   )
 }
