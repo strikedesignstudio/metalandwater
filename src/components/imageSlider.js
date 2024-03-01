@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Slider from 'react-slick'
-import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
-import { graphql, useStaticQuery } from 'gatsby'
-import useWindowSize from '../utils/useWindowSize'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 function NextArrow(props) {
   const { onClick } = props
@@ -66,27 +64,7 @@ function PrevArrow(props) {
   )
 }
 
-const HomeSlider = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      contentfulHomePage {
-        carouselImages {
-          id
-          gatsbyImageData
-          description
-        }
-      }
-    }
-  `)
-  const [initialHeight, setInitialHeight] = useState(800)
-  const { width, height } = useWindowSize()
-  const isMobile = width < 601
-  const images = data.contentfulHomePage.carouselImages
-
-  useEffect(() => {
-    setInitialHeight(height)
-  }, [])
-
+const ImageSlider = ({ images }) => {
   const settings = {
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -94,38 +72,21 @@ const HomeSlider = () => {
     nextArrow: <NextArrow addClassName='next-button home-next-button' />,
     prevArrow: <PrevArrow addClassName='prev-button home-prev-button' />,
     useTransform: false,
-    autoplay: true,
-    autoplaySpeed: 5000,
   }
 
   return (
-    <div
-      className='home-slider-container'
-      style={{ height: `${isMobile ? initialHeight + 'px' : '100vh'}` }}
-    >
-      <Slider
-        {...settings}
-        className='home-slider'
-        style={{ height: `${isMobile ? initialHeight + 'px' : '100vh'}` }}
-      >
-        {images?.map((image, index) => (
-          <div className='home-slide-container' key={index}>
-            <StaticImage
-              src='../images/overlay.png'
-              className='image-overlay'
-              style={{ height: height + 'px' }}
-            ></StaticImage>
-            <GatsbyImage
-              image={image?.gatsbyImageData}
-              alt={image?.description}
-              className='home-slide-image'
-              style={{ height: height + 'px' }}
-            ></GatsbyImage>
-          </div>
-        ))}
-      </Slider>
-    </div>
+    <Slider {...settings}>
+      {images.map((image) => (
+        <div key={image.id}>
+          <GatsbyImage
+            image={image.image.gatsbyImageData}
+            alt={image.image.description}
+          ></GatsbyImage>
+          <p className='image-credit'>{image.imageCredit}</p>
+        </div>
+      ))}
+    </Slider>
   )
 }
 
-export default HomeSlider
+export default ImageSlider
