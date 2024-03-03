@@ -364,6 +364,7 @@ HOME
 
 .home-slide-image {
   width: 100%;
+  filter: grayscale(100%);
 }
 
 .image-overlay {
