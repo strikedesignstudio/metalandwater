@@ -215,6 +215,10 @@ header li {
   height: 4px;
 }
 
+#nav-icon:hover {
+  opacity: 1;
+}
+
 .navbar ul {
   display: none;
 }
@@ -438,7 +442,7 @@ Image Slider
 .image-credit {
   font-size: 0.75rem;
   text-align: right;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0;
 }
 
 /*
@@ -506,4 +510,111 @@ Dropdown Text
     max-height: 800px;
     padding-top: 1rem;
   }
+}
+
+/*
+==========
+Artists Page
+==========
+*/
+
+.artists-container {
+  padding: 1.5rem;
+  padding-top: 250px;
+}
+
+.artist-listing-item {
+  font-size: 1.5rem;
+  border-bottom: 2px solid #fff;
+  padding: 0.5rem 0;
+  width: 100%;
+  display: block;
+}
+
+.artist-tooltip {
+  width: 50vw;
+  opacity: 1;
+  padding: 6px;
+}
+
+/*
+==========
+Single Artist Page
+==========
+*/
+
+.artist-title {
+  font-size: 1.5rem;
+}
+
+.artist-hero {
+  display: flex;
+  margin-bottom: 80px;
+}
+
+.artist-title,
+.featured-image-container {
+  width: 50%;
+}
+
+.work-container {
+  display: flex;
+  margin: 80px 0;
+  flex-wrap: wrap;
+}
+
+.work-media {
+  width: 75%;
+}
+
+.work-info {
+  width: 25%;
+  padding-right: 1rem;
+}
+
+.artist-underline {
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #fff;
+}
+
+.work-slide {
+  margin-bottom: 1rem;
+}
+
+.slick-dots li button:before {
+  background-color: #fff;
+  height: 15px;
+  width: 15px;
+  border-radius: 100%;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 750px) {
+  .artist-hero {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .artist-title,
+  .featured-image-container {
+    width: 100%;
+  }
+}
+
+/*
+==========
+Not Found Page
+==========
+*/
+
+.not-found-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
 }

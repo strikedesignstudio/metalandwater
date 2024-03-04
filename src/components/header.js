@@ -36,50 +36,29 @@ const Header = () => {
           </button>
           <ul className='desktop-page-links'>
             <li>
-              <Link
-                to='/about'
-              >
-                About Metal and Water
-              </Link>
+              <Link to='/about'>About Metal and Water</Link>
             </li>
             <li>
-              <Link
-                to='/artists'
-              >
-                Artists
-              </Link>
+              <Link to='/artists'>Artists</Link>
             </li>
             <li>
-              <Link
-                to='/calendar'
-              >
-                What's On
-              </Link>
+              <Link to='/calendar'>What's On</Link>
             </li>
           </ul>
         </div>
         <ul className={`mobile-page-links ${isOpen ? 'show' : 'hide'}`}>
           <li>
-            <Link
-              to='/case-studies'
-              onClick={toggleSidebar}
-            >
+            <Link to='/about' onClick={toggleSidebar}>
               About Metal and Water
             </Link>
           </li>
           <li>
-            <Link
-              to='/work'
-              onClick={toggleSidebar}
-            >
+            <Link to='/artists' onClick={toggleSidebar}>
               Artists
             </Link>
           </li>
           <li>
-            <Link
-              to='/calendar'
-              onClick={toggleSidebar}
-            >
+            <Link to='/calendar' onClick={toggleSidebar}>
               What's On
             </Link>
           </li>
