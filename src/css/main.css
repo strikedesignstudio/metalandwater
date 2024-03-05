@@ -321,7 +321,7 @@ footer a {
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  z-index: 10000;
+  z-index: 400;
 }
 
 .prev-button {
@@ -619,7 +619,6 @@ Not Found Page
   flex-direction: column;
 }
 
-
 /*
 ==========
 Calendar Page
@@ -659,5 +658,47 @@ Calendar Page
 
   .calendar-link {
     align-items: flex-start;
+  }
+}
+
+/*
+=============== 
+Splash
+===============
+*/
+
+.splash-container {
+  z-index: 550;
+  background: #000;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  animation: fadeAway 400ms 3000ms forwards;
+}
+
+.black-overlay-svg {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 2000;
+  animation: dash 3s linear;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -2000;
+  }
+}
+
+@keyframes fadeAway {
+  99% {
+    opacity: 0;
+    z-index: inherit;
+  }
+  100% {
+    z-index: -1000;
   }
 }
