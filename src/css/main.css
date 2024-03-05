@@ -682,14 +682,14 @@ Splash
 }
 
 .black-overlay-svg {
-  stroke-dashoffset: 0;
+  stroke-dashoffset: 4000;
   stroke-dasharray: 2000;
-  animation: dash 3s linear;
+  animation: dash 3s linear 1s;
 }
 
 @keyframes dash {
   to {
-    stroke-dashoffset: -2000;
+    stroke-dashoffset: 2000;
   }
 }
 
