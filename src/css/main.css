@@ -250,8 +250,8 @@ header li {
 }
 
 .mobile-page-links li {
-  font-size: 60px;
-  padding: 20px;
+  font-size: 2rem;
+  padding: 30px 15px;
 }
 
 @media screen and (min-width: 769px) {
@@ -518,7 +518,7 @@ Artists Page
 ==========
 */
 
-.artists-container {
+.page-container {
   padding: 1.5rem;
   padding-top: 250px;
 }
@@ -532,9 +532,9 @@ Artists Page
 }
 
 .artist-tooltip {
-  width: 50vw;
-  opacity: 1;
-  padding: 6px;
+  width: 40vw !important;
+  opacity: 1 !important;
+  padding: 6px !important;
 }
 
 /*
@@ -617,4 +617,47 @@ Not Found Page
   align-items: center;
   text-align: center;
   flex-direction: column;
+}
+
+
+/*
+==========
+Calendar Page
+==========
+*/
+
+.arrow-right {
+  height: 1rem;
+  transform: rotate(-90deg);
+}
+
+.calendar-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-top: 2px solid #fff;
+  padding: 0.5rem 0;
+}
+
+.calendar-heading {
+  margin-bottom: 1rem;
+}
+
+.month-container {
+  margin-bottom: 3rem;
+}
+
+.calendar-info {
+  display: flex;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 750px) {
+  .calendar-info {
+    display: block;
+  }
+
+  .calendar-link {
+    align-items: flex-start;
+  }
 }

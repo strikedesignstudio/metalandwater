@@ -22,7 +22,7 @@ const SingleArtist = ({ data }) => {
 
   return (
     <Layout>
-      <div className='artists-container'>
+      <div className='page-container'>
         <div className='artist-hero'>
           <h1 className='artist-title'>{artist}</h1>
           <div className='featured-image-container'>

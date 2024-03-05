@@ -4,12 +4,15 @@ import Seo from '../components/seo'
 import { graphql, Link } from 'gatsby'
 import { Tooltip } from 'react-tooltip'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import useWindowSize from '../utils/useWindowSize'
 
 const Artists = ({ data }) => {
-  const artists = data.allContentfulArtist.nodes
+  const artists = data.contentfulArtistsPage.artistListing
+  const { width } = useWindowSize()
+  const isMobile = width < 750
   return (
     <Layout>
-      <div className='artists-container'>
+      <div className='page-container'>
         {artists.map((artist) => (
           <Link
             key={artist.id}
@@ -20,20 +23,23 @@ const Artists = ({ data }) => {
             {artist.artist}
           </Link>
         ))}
-        {artists.map((artist) => (
-          <Tooltip
-            id={artist.id}
-            key={artist.id}
-            place='right'
-            float={true}
-            clickable
-            className='artist-tooltip'
-          >
-            <GatsbyImage
-              image={artist.featuredImage.image.gatsbyImageData}
-            ></GatsbyImage>
-          </Tooltip>
-        ))}
+        {!isMobile &&
+          artists.map((artist) => (
+            <Tooltip
+              id={artist.id}
+              key={artist.id}
+              place='right'
+              float={true}
+              clickable
+              className='artist-tooltip'
+            >
+              <Link to={`/artist/${artist.slug}`}>
+                <GatsbyImage
+                  image={artist.featuredImage.image.gatsbyImageData}
+                ></GatsbyImage>
+              </Link>
+            </Tooltip>
+          ))}
       </div>
     </Layout>
   )
@@ -41,8 +47,8 @@ const Artists = ({ data }) => {
 
 export const query = graphql`
   query {
-    allContentfulArtist {
-      nodes {
+    contentfulArtistsPage {
+      artistListing {
         artist
         slug
         id
