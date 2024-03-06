@@ -380,7 +380,7 @@ HOME
 }
 
 .image-overlay {
-  position: absolute;
+  position: absolute !important;
   z-index: 10;
   opacity: 0.5;
 }
