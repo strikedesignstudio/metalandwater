@@ -10,7 +10,7 @@ const Calendar = ({ data }) => {
   const isMobile = width < 750
   return (
     <Layout>
-      <div className='page-container'>
+      <div className='calendar-container'>
         {months.map((month) => (
           <div key={month.id} className='month-container'>
             <h2 className='calendar-heading'>{month.monthHeading}</h2>
@@ -42,7 +42,6 @@ const Calendar = ({ data }) => {
                       y2='30'
                       transform='translate(11)'
                       fill='none'
-                      stroke='#fff'
                       stroke-width='3'
                     />
                     <path
@@ -50,7 +49,6 @@ const Calendar = ({ data }) => {
                       data-name='Polygon 1'
                       d='M11,0,22,14H0Z'
                       transform='translate(22 33.5) rotate(-180)'
-                      fill='#fff'
                     />
                   </svg>
                 )}

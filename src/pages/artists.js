@@ -12,7 +12,7 @@ const Artists = ({ data }) => {
   const isMobile = width < 750
   return (
     <Layout>
-      <div className='page-container'>
+      <div className='page-container artists-page'>
         {artists.map((artist) => (
           <Link
             key={artist.id}
@@ -28,8 +28,8 @@ const Artists = ({ data }) => {
             <Tooltip
               id={artist.id}
               key={artist.id}
-              place='right'
-              float={true}
+              noArrow
+              place='bottom'
               clickable
               className='artist-tooltip'
             >

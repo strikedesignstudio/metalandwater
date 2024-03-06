@@ -52,6 +52,10 @@ html {
   color: #fff;
 }
 
+body {
+  cursor: url('../images/cursor.png'), auto;
+}
+
 @media screen and (max-width: 600px) {
   html {
     font-size: 16px;
@@ -65,7 +69,6 @@ html {
 button {
   border: none;
   background: none;
-  cursor: pointer;
   color: inherit;
   font-size: inherit;
   font-weight: inherit;
@@ -81,6 +84,7 @@ button:hover {
 a {
   font-family: inherit;
   text-decoration: none;
+  cursor: inherit;
   color: inherit;
   transition: all var(--fast-transition);
 }
@@ -104,7 +108,7 @@ a:hover {
 }
 
 h2 {
-  font-weight: var(--thin-weight);
+  font-weight: 400;
   font-size: var(--font-md-resp);
   margin-bottom: var(--spacing-md);
 }
@@ -136,7 +140,7 @@ header li {
 }
 
 .nav-logo {
-  width: clamp(140px, 50vw, 250px);
+  width: clamp(80px, 20vw, 200px);
 }
 
 #nav-icon {
@@ -151,7 +155,6 @@ header li {
   -moz-transition: 0.5s ease-in-out;
   -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
-  cursor: pointer;
 }
 
 #nav-icon span {
@@ -262,12 +265,18 @@ header li {
 
   .navbar ul {
     display: flex;
-    font-size: 30px;
+    font-size: 20px;
   }
 
   .navbar ul li a {
     display: inline-block;
     margin-left: 50px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .navbar ul {
+    font-size: 30px;
   }
 }
 
@@ -320,8 +329,7 @@ footer a {
   height: 30px;
   top: 50%;
   transform: translateY(-50%);
-  cursor: pointer;
-  z-index: 400;
+  z-index: 100;
 }
 
 .prev-button {
@@ -372,18 +380,16 @@ HOME
 }
 
 .image-overlay {
-  position: absolute !important;
+  position: absolute;
   z-index: 10;
   opacity: 0.5;
 }
 
 .hero-svg {
-  stroke: #fff;
-  stroke-width: 1;
-  mix-blend-mode: difference;
+  stroke: #000;
+  stroke-width: 2;
   height: 100%;
   width: 100%;
-  opacity: var(--less-opacity);
 }
 
 /*
@@ -534,7 +540,11 @@ Artists Page
 .artist-tooltip {
   width: 40vw !important;
   opacity: 1 !important;
-  padding: 6px !important;
+  padding: 0px !important;
+}
+
+.artists-page a:first-of-type {
+  border-top: 2px solid #fff;
 }
 
 /*
@@ -601,6 +611,21 @@ Single Artist Page
   .featured-image-container {
     width: 100%;
   }
+
+  .page-container,
+  .about-mission {
+    padding-top: 150px;
+  }
+
+  .work-media,
+  .work-info {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .work-container {
+    flex-wrap: wrap-reverse;
+  }
 }
 
 /*
@@ -628,6 +653,11 @@ Calendar Page
 .arrow-right {
   height: 1rem;
   transform: rotate(-90deg);
+  stroke: #fff;
+}
+
+.arrow-right path {
+  fill: #fff;
 }
 
 .calendar-link {
@@ -635,7 +665,7 @@ Calendar Page
   align-items: center;
   gap: 1rem;
   border-top: 2px solid #fff;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1.5rem;
 }
 
 .calendar-heading {
@@ -649,6 +679,28 @@ Calendar Page
 .calendar-info {
   display: flex;
   gap: 1rem;
+}
+
+.calendar-container {
+  padding-top: 250px;
+}
+
+.calendar-heading {
+  padding: 0 1.5rem;
+}
+
+.calendar-link:hover {
+  color: #000;
+  background: #fff;
+  opacity: 1;
+}
+
+.calendar-link:hover .arrow-right {
+  stroke: #000;
+}
+
+.calendar-link:hover .arrow-right path {
+  fill: #000;
 }
 
 @media screen and (max-width: 750px) {
@@ -684,7 +736,7 @@ Splash
 .black-overlay-svg {
   stroke-dashoffset: 4000;
   stroke-dasharray: 2000;
-  animation: dash 3s linear 1s;
+  animation: dash 2s linear 1s;
 }
 
 @keyframes dash {

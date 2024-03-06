@@ -38,43 +38,23 @@ const SingleArtist = ({ data }) => {
             __html: artistInfo.childMarkdownRemark.html,
           }}
         ></div>
-        {isMobile ? (
-          <Slider {...settings} className='work-container'>
-            {works?.map((work) => (
-              <div key={work.id} className='work-slide'>
-                <ImageSlider images={work.images}></ImageSlider>
-                <div className='work-info-mobile'>
-                  <p className='artist-underline'>{work.nameOfWork}</p>
-                  <p className='artist-underline'>{work.year}</p>
-                  <p className='artist-underline'>{work.location}</p>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: work.workDescription.childMarkdownRemark.html,
-                    }}
-                  ></div>
-                </div>
-              </div>
-            ))}
-          </Slider>
-        ) : (
-          works?.map((work) => (
-            <div key={work.id} className='work-container'>
-              <div className='work-info'>
-                <p className='artist-underline'>{work.nameOfWork}</p>
-                <p className='artist-underline'>{work.year}</p>
-                <p className='artist-underline'>{work.location}</p>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: work.workDescription.childMarkdownRemark.html,
-                  }}
-                ></div>
-              </div>
-              <div className='work-media'>
-                <ImageSlider images={work.images}></ImageSlider>
-              </div>
+        {works?.map((work) => (
+          <div key={work.id} className='work-container'>
+            <div className='work-info'>
+              <p className='artist-underline'>{work.nameOfWork}</p>
+              <p className='artist-underline'>{work.year}</p>
+              <p className='artist-underline'>{work.location}</p>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: work.workDescription.childMarkdownRemark.html,
+                }}
+              ></div>
             </div>
-          ))
-        )}
+            <div className='work-media'>
+              <ImageSlider images={work.images}></ImageSlider>
+            </div>
+          </div>
+        ))}
       </div>
     </Layout>
   )
