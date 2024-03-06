@@ -392,6 +392,14 @@ HOME
   width: 100%;
 }
 
+@media screen and (max-width: 750px) {
+  .prev-button,
+  .next-button {
+    width: 15px;
+    height: 15px;
+  }
+}
+
 /*
 ==========
 About Page
