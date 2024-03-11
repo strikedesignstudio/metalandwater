@@ -56,11 +56,13 @@ body {
   cursor: url('../images/cursor-outline.png'), auto;
 }
 
-a, button {
+a,
+button {
   cursor: url('../images/cursor-outline.png'), auto;
 }
 
-a:active, button:active {
+a:active,
+button:active {
   cursor: url('../images/cursor-filled.png'), auto;
 }
 
@@ -400,6 +402,14 @@ HOME
   width: 100%;
 }
 
+.home-credit {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 100;
+  max-width: calc(100% - 20px);
+}
+
 @media screen and (max-width: 750px) {
   .prev-button,
   .next-button {
@@ -545,12 +555,24 @@ Artists Page
   padding-top: 250px;
 }
 
+.artists-page {
+  padding-top: 250px;
+}
+
 .artist-listing-item {
   font-size: 1.5rem;
   border-bottom: 2px solid #fff;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1.5rem;
   width: 100%;
   display: block;
+  transition: all var(--fast-transition);
+}
+
+.artist-listing-item:hover {
+  color: #000;
+  background: #fff;
+  opacity: 1;
+  transition: all var(--fast-transition);
 }
 
 .artist-tooltip {

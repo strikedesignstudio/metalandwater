@@ -12,7 +12,7 @@ const Artists = ({ data }) => {
   const isMobile = width < 750
   return (
     <Layout>
-      <div className='page-container artists-page'>
+      <div className='artists-page'>
         {artists.map((artist) => (
           <Link
             key={artist.id}

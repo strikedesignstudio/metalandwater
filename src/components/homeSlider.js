@@ -66,8 +66,11 @@ const HomeSlider = () => {
       contentfulHomePage {
         carouselImages {
           id
-          gatsbyImageData
-          description
+          image {
+            description
+            gatsbyImageData
+          }
+          imageCredit
         }
       }
     }
@@ -107,14 +110,15 @@ const HomeSlider = () => {
         className='home-slider'
         style={{ height: `${isMobile ? initialHeight + 'px' : '100vh'}` }}
       >
-        {images?.map((image, index) => (
-          <div className='home-slide-container' key={index}>
+        {images?.map((image) => (
+          <div className='home-slide-container' key={image.id}>
             <GatsbyImage
-              image={image?.gatsbyImageData}
-              alt={image?.description}
+              image={image?.image?.gatsbyImageData}
+              alt={image?.image?.description}
               className='home-slide-image'
               style={{ height: height + 'px' }}
             ></GatsbyImage>
+            <p className='home-credit'>{image.imageCredit}</p>
           </div>
         ))}
       </Slider>
