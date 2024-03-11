@@ -100,11 +100,6 @@ const HomeSlider = () => {
       className='home-slider-container'
       style={{ height: `${isMobile ? initialHeight + 'px' : '100vh'}` }}
     >
-      <StaticImage
-        src='../images/overlay.png'
-        className='image-overlay'
-        style={{ height: height + 'px' }}
-      ></StaticImage>
       <Slider
         {...settings}
         className='home-slider'
@@ -112,6 +107,11 @@ const HomeSlider = () => {
       >
         {images?.map((image) => (
           <div className='home-slide-container' key={image.id}>
+            <StaticImage
+              src='../images/overlay.png'
+              className='image-overlay'
+              style={{ height: height + 'px' }}
+            ></StaticImage>
             <GatsbyImage
               image={image?.image?.gatsbyImageData}
               alt={image?.image?.description}
