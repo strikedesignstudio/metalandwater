@@ -2,8 +2,8 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
-import ImageSlider from '../components/imageSlider'
 import DropdownText from '../components/dropdownText'
+import AboutImgSlider from '../components/aboutImgSlider'
 
 const About = ({ data }) => {
   const { aboutText, contact, dropdownFields, images, images2, mission } =
@@ -15,7 +15,7 @@ const About = ({ data }) => {
         dangerouslySetInnerHTML={{ __html: mission.childMarkdownRemark.html }}
       ></div>
       <div className='about-carousel-container'>
-        <ImageSlider images={images}></ImageSlider>
+        <AboutImgSlider images={images}></AboutImgSlider>
       </div>
       <div
         className='about-text'
@@ -27,7 +27,7 @@ const About = ({ data }) => {
         ))}
       </div>
       <div className='about-carousel-container'>
-        <ImageSlider images={images2}></ImageSlider>
+        <AboutImgSlider images={images2}></AboutImgSlider>
       </div>
       <div className='about-contact'>
         <p>Contact</p>{' '}
