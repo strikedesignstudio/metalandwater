@@ -12,6 +12,7 @@ const Header = () => {
         <div className='navbar'>
           <Link to='/' onClick={isOpen ? toggleSidebar : () => {}}>
             <svg
+              title='Logo link to homepage'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 200.785 96'
               className='nav-logo'
