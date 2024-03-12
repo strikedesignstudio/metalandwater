@@ -2,15 +2,20 @@ import React from 'react'
 import Seo from '../components/seo'
 import Layout from '../components/layout'
 import HomeSlider from '../components/homeSlider'
-import SplashContainer from '../components/splashContainer'
+import Splash from '../components/splash'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const Index = ({ location }) => {
   return (
     <>
-      <SplashContainer></SplashContainer>
-      <Layout location={location}>
-        <HomeSlider />
-      </Layout>
+      <Splash></Splash>
+      <AnimatePresence>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <Layout location={location}>
+            <HomeSlider />
+          </Layout>
+        </motion.div>
+      </AnimatePresence>
     </>
   )
 }
