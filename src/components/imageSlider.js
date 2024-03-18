@@ -73,8 +73,8 @@ const ImageSlider = ({ images }) => {
       {images.map((image) => (
         <div key={image.id}>
           <GatsbyImage
-            image={image.image.gatsbyImageData}
-            alt={image.image.description}
+            image={image.image?.gatsbyImageData}
+            alt={image.image?.description}
           ></GatsbyImage>
           <p className='image-credit'>{image.imageCredit}</p>
         </div>

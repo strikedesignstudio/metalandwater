@@ -78,8 +78,8 @@ const AboutImgSlider = ({ images }) => {
               className='image-overlay-about'
             ></StaticImage>
             <GatsbyImage
-              image={image.image.gatsbyImageData}
-              alt={image.image.description}
+              image={image.image?.gatsbyImageData}
+              alt={image.image?.description}
               className='about-image'
             ></GatsbyImage>
           </div>

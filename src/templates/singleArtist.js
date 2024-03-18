@@ -27,7 +27,8 @@ const SingleArtist = ({ data }) => {
           <h1 className='artist-title'>{artist}</h1>
           <div className='featured-image-container'>
             <GatsbyImage
-              image={featuredImage.image.gatsbyImageData}
+              image={featuredImage.image?.gatsbyImageData}
+              alt={featuredImage.image?.description}
             ></GatsbyImage>
             <p className='image-credit'>{featuredImage.imageCredit}</p>
           </div>
@@ -67,6 +68,7 @@ export const query = graphql`
       featuredImage {
         image {
           gatsbyImageData
+          description
         }
         imageCredit
       }

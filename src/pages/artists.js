@@ -35,7 +35,7 @@ const Artists = ({ data }) => {
             >
               <Link to={`/artist/${artist.slug}`}>
                 <GatsbyImage
-                  image={artist.featuredImage.image.gatsbyImageData}
+                  image={artist.featuredImage.image?.gatsbyImageData}
                 ></GatsbyImage>
               </Link>
             </Tooltip>
