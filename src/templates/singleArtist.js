@@ -5,7 +5,8 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import ImageSlider from '../components/imageSlider'
 
 const SingleArtist = ({ data }) => {
-  const { artist, featuredImage, artistInfo, works } = data.contentfulArtist
+  const { artist, featuredImage, artistInfo, works, credits } =
+    data.contentfulArtist
 
   return (
     <Layout>
@@ -32,9 +33,17 @@ const SingleArtist = ({ data }) => {
               <p className='artist-underline'>{work.nameOfWork}</p>
               <p className='artist-underline'>{work.year}</p>
               <p className='artist-underline'>{work.location}</p>
+              {work.credits && (
+                <div
+                  className='artist-underline'
+                  dangerouslySetInnerHTML={{
+                    __html: work.credits.childMarkdownRemark.html,
+                  }}
+                ></div>
+              )}
               <div
                 dangerouslySetInnerHTML={{
-                  __html: work.workDescription.childMarkdownRemark?.html,
+                  __html: work.workDescription?.childMarkdownRemark.html,
                 }}
               ></div>
             </div>
@@ -77,6 +86,11 @@ export const query = graphql`
         year
         location
         workDescription {
+          childMarkdownRemark {
+            html
+          }
+        }
+        credits {
           childMarkdownRemark {
             html
           }
