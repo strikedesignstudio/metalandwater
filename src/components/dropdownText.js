@@ -34,7 +34,7 @@ const DropdownText = ({ text }) => {
         className={
           open ? 'dropdown-text dropdown-show' : 'dropdown-text dropdown-hide'
         }
-        dangerouslySetInnerHTML={{ __html: text.text.childMarkdownRemark.html }}
+        dangerouslySetInnerHTML={{ __html: text.text.childMarkdownRemark?.html }}
       ></div>
     </div>
   )

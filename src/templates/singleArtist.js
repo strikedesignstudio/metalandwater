@@ -3,13 +3,10 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import ImageSlider from '../components/imageSlider'
-import useWindowSize from '../utils/useWindowSize'
-import Slider from 'react-slick'
 
 const SingleArtist = ({ data }) => {
   const { artist, featuredImage, artistInfo, works } = data.contentfulArtist
-  const { width } = useWindowSize()
-  const isMobile = width < 750
+
 
   const settings = {
     slidesToShow: 1,
@@ -36,7 +33,7 @@ const SingleArtist = ({ data }) => {
         <div
           className='artist-bio'
           dangerouslySetInnerHTML={{
-            __html: artistInfo.childMarkdownRemark.html,
+            __html: artistInfo.childMarkdownRemark?.html,
           }}
         ></div>
         {works?.map((work) => (
@@ -47,7 +44,7 @@ const SingleArtist = ({ data }) => {
               <p className='artist-underline'>{work.location}</p>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: work.workDescription.childMarkdownRemark.html,
+                  __html: work.workDescription.childMarkdownRemark?.html,
                 }}
               ></div>
             </div>
