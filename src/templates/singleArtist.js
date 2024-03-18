@@ -33,7 +33,7 @@ const SingleArtist = ({ data }) => {
         <div
           className='artist-bio'
           dangerouslySetInnerHTML={{
-            __html: artistInfo.childMarkdownRemark?.html,
+            __html: artistInfo?.childMarkdownRemark?.html,
           }}
         ></div>
         {works?.map((work) => (

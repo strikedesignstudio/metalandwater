@@ -12,14 +12,14 @@ const About = ({ data }) => {
     <Layout>
       <div
         className='about-mission'
-        dangerouslySetInnerHTML={{ __html: mission.childMarkdownRemark?.html }}
+        dangerouslySetInnerHTML={{ __html: mission?.childMarkdownRemark?.html }}
       ></div>
       <div className='about-carousel-container'>
         <AboutImgSlider images={images}></AboutImgSlider>
       </div>
       <div
         className='about-text'
-        dangerouslySetInnerHTML={{ __html: aboutText.childMarkdownRemark?.html }}
+        dangerouslySetInnerHTML={{ __html: aboutText?.childMarkdownRemark?.html }}
       ></div>
       <div className='about-dropdown-container'>
         {dropdownFields.map((text) => (
