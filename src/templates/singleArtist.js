@@ -7,16 +7,6 @@ import ImageSlider from '../components/imageSlider'
 const SingleArtist = ({ data }) => {
   const { artist, featuredImage, artistInfo, works } = data.contentfulArtist
 
-
-  const settings = {
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    infinite: true,
-    useTransform: false,
-    dots: true,
-    arrows: false,
-  }
-
   return (
     <Layout>
       <div className='page-container'>

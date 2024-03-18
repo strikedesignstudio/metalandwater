@@ -648,6 +648,10 @@ Single Artist Page
   border-bottom: 1px solid #fff;
 }
 
+.artist-bio p {
+  margin-bottom: 30px;
+}
+
 .work-slide {
   margin-bottom: 1rem;
 }
