@@ -5,7 +5,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import ImageSlider from '../components/imageSlider'
 
 const SingleArtist = ({ data }) => {
-  const { artist, featuredImage, artistInfo, works, credits } =
+  const { artist, featuredImage, artistInfo, works } =
     data.contentfulArtist
 
   return (

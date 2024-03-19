@@ -6,14 +6,10 @@ import DropdownText from '../components/dropdownText'
 import AboutImgSlider from '../components/aboutImgSlider'
 
 const About = ({ data }) => {
-  const { aboutText, contact, dropdownFields, images, images2, mission } =
+  const { aboutText, contact, dropdownFields, images, images2 } =
     data.contentfulAboutPage
   return (
     <Layout>
-      <div
-        className='about-mission'
-        dangerouslySetInnerHTML={{ __html: mission?.childMarkdownRemark?.html }}
-      ></div>
       <div className='about-carousel-container'>
         <AboutImgSlider images={images}></AboutImgSlider>
       </div>
@@ -81,11 +77,6 @@ export const query = graphql`
           description
         }
         imageCredit
-      }
-      mission {
-        childMarkdownRemark {
-          html
-        }
       }
     }
   }

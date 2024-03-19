@@ -598,12 +598,20 @@ Artists Page
 }
 
 .artist-tooltip {
-  width: 40vw !important;
-  opacity: 1 !important;
-  padding: 0px !important;
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40vw;
+  border: none;
 }
 
-.artists-page a:first-of-type {
+.artist-tooltip:hover {
+  opacity: 1;
+}
+
+.artists-page > a:first-of-type {
   border-top: 2px solid #fff;
 }
 
@@ -816,5 +824,11 @@ Splash
   }
   100% {
     z-index: -1000;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }

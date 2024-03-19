@@ -3,7 +3,7 @@ import Header from './header'
 import Footer from './footer'
 import { Script } from 'gatsby'
 
-const Layout = ({ children, location }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <Header></Header>
@@ -12,7 +12,7 @@ const Layout = ({ children, location }) => {
         src='https://website-widgets.pages.dev/dist/sienna.min.js'
         defer
       ></Script>
-      {location?.pathname !== '/' && <Footer></Footer>}
+      <Footer></Footer>
     </>
   )
 }

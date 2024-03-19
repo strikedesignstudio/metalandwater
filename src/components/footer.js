@@ -11,14 +11,13 @@ const Footer = () => {
           }
         }
         addressLink
-        xHandle
         phoneNumber
         generalEmail
       }
     }
   `)
 
-  const { address, xHandle, phoneNumber, generalEmail, addressLink } = data.contentfulFooter
+  const { address, phoneNumber, generalEmail, addressLink } = data.contentfulFooter
 
   return (
     <footer>
@@ -41,11 +40,11 @@ const Footer = () => {
       </div>
       <div>
         <a
-          href={`https://www.x.com/${xHandle}`}
+          href='https://www.instagram.com/metalwater.co/'
           target='_blank'
           rel='noreferrer'
         >
-          @{xHandle}
+          @metalwater.co
         </a>
       </div>
     </footer>
