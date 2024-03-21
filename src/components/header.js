@@ -50,7 +50,7 @@ const Header = () => {
         <ul className={`mobile-page-links ${isOpen ? 'show' : 'hide'}`}>
           <li>
             <Link to='/about' onClick={toggleSidebar}>
-              About Metal and Water
+              About Metal & Water
             </Link>
           </li>
           <li>
