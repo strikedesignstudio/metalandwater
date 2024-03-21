@@ -32,7 +32,6 @@ const SingleArtist = ({ data }) => {
             <div className='work-info'>
               <p className='artist-underline'>{work.nameOfWork}</p>
               <p className='artist-underline'>{work.year}</p>
-              <p className='artist-underline'>{work.location}</p>
               {work.credits && (
                 <div
                   className='artist-underline'
@@ -84,7 +83,6 @@ export const query = graphql`
           imageCredit
         }
         year
-        location
         workDescription {
           childMarkdownRemark {
             html

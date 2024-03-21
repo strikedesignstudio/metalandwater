@@ -6,7 +6,7 @@ import DropdownText from '../components/dropdownText'
 import AboutImgSlider from '../components/aboutImgSlider'
 
 const About = ({ data }) => {
-  const { aboutText, contact, dropdownFields, images, images2 } =
+  const { aboutText, contact, dropdownFields, images } =
     data.contentfulAboutPage
   return (
     <Layout>
@@ -21,9 +21,6 @@ const About = ({ data }) => {
         {dropdownFields.map((text) => (
           <DropdownText text={text} key={text.id}></DropdownText>
         ))}
-      </div>
-      <div className='about-carousel-container'>
-        <AboutImgSlider images={images2}></AboutImgSlider>
       </div>
       <div className='about-contact'>
         <p>Contact</p>{' '}
@@ -69,14 +66,6 @@ export const query = graphql`
           gatsbyImageData
           description
         }
-      }
-      images2 {
-        id
-        image {
-          gatsbyImageData
-          description
-        }
-        imageCredit
       }
     }
   }
