@@ -37,7 +37,7 @@ const Header = () => {
           </button>
           <ul className='desktop-page-links'>
             <li>
-              <Link to='/about'>About Metal and Water</Link>
+              <Link to='/about'>About Metal & Water</Link>
             </li>
             <li>
               <Link to='/artists'>Artists</Link>
