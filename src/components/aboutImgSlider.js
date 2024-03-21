@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from 'react-slick'
-import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 function NextArrow(props) {
   const { onClick } = props
@@ -73,10 +73,6 @@ const AboutImgSlider = ({ images }) => {
       {images.map((image) => (
         <div key={image.id}>
           <div className='about-image-container'>
-            <StaticImage
-              src='../images/overlay.png'
-              className='image-overlay-about'
-            ></StaticImage>
             <GatsbyImage
               image={image.image?.gatsbyImageData}
               alt={image.image?.description}

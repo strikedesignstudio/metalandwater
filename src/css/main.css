@@ -385,22 +385,17 @@ HOME
   width: 100%;
 }
 
-.home-slide-image,
-.about-image {
+.home-slide-image {
   width: 100%;
   filter: grayscale(100%);
 }
 
-.about-image-container {
-  position: relative;
+.about-image {
+  width: 100%;
 }
 
-.image-overlay-about {
-  position: absolute !important;
-  z-index: 10;
-  min-width: 100%;
-  min-height: 100%;
-  opacity: 0.5;
+.about-image-container {
+  position: relative;
 }
 
 .image-overlay {

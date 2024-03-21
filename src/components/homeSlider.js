@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Slider from 'react-slick'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
 import { graphql, useStaticQuery } from 'gatsby'
 import useWindowSize from '../utils/useWindowSize'
 
@@ -107,6 +107,11 @@ const HomeSlider = () => {
       >
         {images?.map((image) => (
           <div className='home-slide-container' key={image.id}>
+            <StaticImage
+              src='../images/overlay.png'
+              className='image-overlay'
+              style={{ height: `${isMobile ? initialHeight + 'px' : '100vh'}` }}
+            ></StaticImage>
             <GatsbyImage
               image={image?.image?.gatsbyImageData}
               alt={image?.image?.description}
