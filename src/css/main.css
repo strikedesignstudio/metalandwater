@@ -784,9 +784,8 @@ Calendar Page
   }
 
   .calendar-info {
-    width: 75%;
+    width: calc(75% - 1rem);
   }
-
 }
 
 /*
