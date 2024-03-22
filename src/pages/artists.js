@@ -27,7 +27,7 @@ export const query = graphql`
         id
         featuredImage {
           image {
-            gatsbyImageData
+            gatsbyImageData(width: 1000)
           }
         }
       }
