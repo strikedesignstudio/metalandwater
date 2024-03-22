@@ -78,7 +78,7 @@ export const query = graphql`
           id
           image {
             description
-            gatsbyImageData
+            gatsbyImageData(width: 3000)
           }
           imageCredit
         }
