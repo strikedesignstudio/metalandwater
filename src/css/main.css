@@ -778,6 +778,15 @@ Calendar Page
   .calendar-link {
     align-items: flex-start;
   }
+
+  .calendar-date {
+    width: 25%;
+  }
+
+  .calendar-info {
+    width: 75%;
+  }
+
 }
 
 /*

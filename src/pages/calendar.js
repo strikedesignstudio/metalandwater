@@ -22,7 +22,7 @@ const Calendar = ({ data }) => {
                 rel='noreferrer'
                 className='calendar-link'
               >
-                <div>{performance.date}</div>
+                <div className='calendar-date'>{performance.date}</div>
                 {!isMobile && <span>&mdash;</span>}
                 <div className='calendar-info'>
                   <div>{performance.title}</div>
