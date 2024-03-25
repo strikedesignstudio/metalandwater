@@ -123,6 +123,7 @@ h2 {
   margin-bottom: var(--spacing-md);
 }
 
+
 /*
 ==========
 HEADER
@@ -320,6 +321,11 @@ footer a {
 
 .footer-logo {
   font-size: var(--font-md);
+}
+
+.footer-credit {
+  font-size: 85%;
+  margin-top: var(--spacing-md);
 }
 
 @media screen and (max-width: 860px) {
@@ -643,6 +649,10 @@ Single Artist Page
 .work-info {
   width: 25%;
   padding-right: 1rem;
+}
+
+.work-description p {
+  margin-bottom: 30px;
 }
 
 .artist-underline {

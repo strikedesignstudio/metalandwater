@@ -17,7 +17,8 @@ const Footer = () => {
     }
   `)
 
-  const { address, phoneNumber, generalEmail, addressLink } = data.contentfulFooter
+  const { address, phoneNumber, generalEmail, addressLink } =
+    data.contentfulFooter
 
   return (
     <footer>
@@ -45,6 +46,14 @@ const Footer = () => {
           rel='noreferrer'
         >
           @metalwater.co
+        </a>
+        <a
+          href='https://www.pacificpacific.pub'
+          target='_blank'
+          rel='noreferrer'
+          className='footer-credit'
+        >
+          Website designed and developed by Pacific
         </a>
       </div>
     </footer>

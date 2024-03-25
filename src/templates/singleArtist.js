@@ -44,6 +44,7 @@ const SingleArtist = ({ data }) => {
                 dangerouslySetInnerHTML={{
                   __html: work.workDescription?.childMarkdownRemark.html,
                 }}
+                className='work-description'
               ></div>
             </div>
             <div className='work-media'>
