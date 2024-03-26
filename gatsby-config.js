@@ -4,8 +4,8 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Metal and Water`,
-    description: `The new official website for Metal and Water`,
+    title: `Metal & Water`,
+    description: `The new official website for Metal & Water`,
     author: `@metalandwater`,
     siteUrl: `https://www.metalwater.co`,
     keywords: `art, dance, culture`,

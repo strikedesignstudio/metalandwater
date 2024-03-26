@@ -264,7 +264,7 @@ header li {
 }
 
 .mobile-page-links li {
-  font-size: 2rem;
+  font-size: 1.5rem;
   padding: 30px 15px;
 }
 
@@ -287,7 +287,7 @@ header li {
 
 @media screen and (min-width: 1000px) {
   .navbar ul {
-    font-size: 30px;
+    font-size: 24px;
   }
 }
 
@@ -523,6 +523,7 @@ Dropdown Text
   align-items: center;
   width: 35%;
   font-size: 1.5rem;
+  font-weight: 400;
   padding-right: 1rem;
 }
 
@@ -790,7 +791,7 @@ Calendar Page
   }
 
   .calendar-date {
-    width: 25%;
+    width: 30%;
   }
 
   .calendar-info {

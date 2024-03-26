@@ -3,10 +3,10 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import ImageSlider from '../components/imageSlider'
+import Seo from '../components/seo'
 
 const SingleArtist = ({ data }) => {
-  const { artist, featuredImage, artistInfo, works } =
-    data.contentfulArtist
+  const { artist, featuredImage, artistInfo, works } = data.contentfulArtist
 
   return (
     <Layout>
@@ -80,6 +80,9 @@ export const query = graphql`
           image {
             description
             gatsbyImageData(width: 3000)
+            file {
+              url
+            }
           }
           imageCredit
         }
@@ -99,5 +102,12 @@ export const query = graphql`
     }
   }
 `
+
+export const Head = ({ data }) => (
+  <Seo
+    title={data.contentfulArtist.artist}
+    image={data.contentfulArtist.featuredImage?.image?.file?.url}
+  />
+)
 
 export default SingleArtist
