@@ -48,6 +48,34 @@ const Footer = () => {
           @metalwater.co
         </a>
         <a
+          href='https://mailchi.mp/metalwater/newsletter'
+          target='_blank'
+          rel='noreferrer'
+          className='footer-email'
+        >
+          Sign up for our newsletter{' '}
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='arrow-right'
+            viewBox='0 0 22 33.5'
+          >
+            <line
+              id='Line_33'
+              data-name='Line 33'
+              y2='30'
+              transform='translate(11)'
+              fill='none'
+              stroke-width='3'
+            />
+            <path
+              id='Polygon_1'
+              data-name='Polygon 1'
+              d='M11,0,22,14H0Z'
+              transform='translate(22 33.5) rotate(-180)'
+            />
+          </svg>
+        </a>
+        <a
           href='https://www.pacificpacific.pub'
           target='_blank'
           rel='noreferrer'

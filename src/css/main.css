@@ -327,6 +327,12 @@ footer a {
   margin-top: var(--spacing-md);
 }
 
+.footer-email {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 @media screen and (max-width: 860px) {
   footer {
     flex-direction: column;
