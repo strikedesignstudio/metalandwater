@@ -38,10 +38,14 @@ module.exports = {
     },
     {
       resolve: `gatsby-source-contentful`,
-      options: {
+      /* options: {
         spaceId: `jlkqudx10s2m`,
         accessToken: process.env.CONTENTFUL_API_KEY,
         enableTags: true,
+      }, */
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
   ],
