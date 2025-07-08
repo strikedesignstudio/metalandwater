@@ -39,9 +39,6 @@ const Header = () => {
             <li>
               <Link to='/about'>Metal & Water</Link>
             </li>
-           /* <li>
-              <Link to='/artists'>Artists</Link>
-            </li> */
             <li>
               <Link to='/calendar'>What's On</Link>
             </li>
