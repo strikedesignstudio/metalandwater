@@ -51,11 +51,6 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to='/artists' onClick={toggleSidebar}>
-              Artists
-            </Link>
-          </li>
-          <li>
             <Link to='/calendar' onClick={toggleSidebar}>
               What's On
             </Link>
