@@ -6,7 +6,7 @@ import DropdownText from '../components/dropdownText'
 import AboutImgSlider from '../components/aboutImgSlider'
 
 const About = ({ data }) => {
-  const { aboutText, contact, dropdownFields, images } =
+  const { aboutText, contact, images } =
     data.contentfulAboutPage
   return (
     <Layout>
@@ -17,11 +17,7 @@ const About = ({ data }) => {
         className='about-text'
         dangerouslySetInnerHTML={{ __html: aboutText?.childMarkdownRemark?.html }}
       ></div>
-      <div className='about-dropdown-container'>
-        {dropdownFields.map((text) => (
-          <DropdownText text={text} key={text.id}></DropdownText>
-        ))}
-      </div>
+      
       <div className='about-contact'>
         <p>Contact</p>{' '}
         <div className='about-contact-emails'>
@@ -50,15 +46,7 @@ export const query = graphql`
         name
         email
       }
-      dropdownFields {
-        id
-        heading
-        text {
-          childMarkdownRemark {
-            html
-          }
-        }
-      }
+     
       images {
         id
         imageCredit
