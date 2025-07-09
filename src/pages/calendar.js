@@ -56,8 +56,9 @@ const Calendar = ({ data }) => {
             ))}
           </div>
         ))}
+<a href="https://metalwater.co/archive/" alt="Archive Page">Archive</a>
       </div>
-        <a href="https://metalwater.co/archive/" alt="Archive Page">Archive</a>
+        
     </Layout>
   )
 }
