@@ -63,7 +63,7 @@ const Calendar = ({ data }) => {
 
 export const query = graphql`
   query {
-    contentfulCalendarPage {
+    contentfularchivePage {
       monthListings {
         id
         monthHeading
