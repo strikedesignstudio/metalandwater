@@ -5,7 +5,7 @@ import { graphql } from 'gatsby'
 import useWindowSize from '../utils/useWindowSize'
 
 const Calendar = ({ data }) => {
-  const months = data.contentfulCalendarPage.monthListings
+  const months = data.contentfulArchivePage.monthListings
   const { width } = useWindowSize()
   const isMobile = width < 750
   return (
@@ -63,7 +63,7 @@ const Calendar = ({ data }) => {
 
 export const query = graphql`
   query {
-    contentfularchivePage {
+    contentfulArchivePage {
       monthListings {
         id
         monthHeading
