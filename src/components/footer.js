@@ -11,13 +11,12 @@ const Footer = () => {
           }
         }
         addressLink
-        phoneNumber
         generalEmail
       }
     }
   `)
 
-  const { address, phoneNumber, generalEmail, addressLink } =
+  const { address, generalEmail, addressLink } =
     data.contentfulFooter
 
   return (
@@ -29,7 +28,6 @@ const Footer = () => {
       </div>
       <div>
         <a href={`mailto:${generalEmail}`}>{generalEmail}</a>
-        <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>
       </div>
       <div>
         <a
