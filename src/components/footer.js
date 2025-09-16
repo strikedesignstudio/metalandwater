@@ -22,7 +22,7 @@ const Footer = () => {
   return (
     <footer>
       <div>
-        <Link to='https://www.instagram.com/metalwater.co/' className='footer-logo'>
+        <Link to='https://www.instagram.com/metalwater.co/' target='_blank' className='footer-logo'>
           Metal & Water
         </Link>
       </div>
