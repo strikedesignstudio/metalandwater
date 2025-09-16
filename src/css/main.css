@@ -428,6 +428,7 @@ HOME
   right: 10px;
   z-index: 100;
   max-width: calc(100% - 20px);
+  font-size:14px !Important;
 }
 
 @media screen and (max-width: 750px) {
