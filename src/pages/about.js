@@ -45,6 +45,7 @@ export const query = graphql`
       contact {
         id
         name
+        role
         email
       }
      
