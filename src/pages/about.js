@@ -24,6 +24,7 @@ const About = ({ data }) => {
           {contact.map((contact) => (
             <div key={contact.id}>
               <p>{contact.name}</p>
+              <p>{contact.role}</p>
               <a href={`mailto:${contact.email}`}>{contact.email}</a>
             </div>
           ))}
