@@ -26,6 +26,7 @@ const About = ({ data }) => {
               <p>{contact.name}</p>
               <p>{contact.role}</p>
               <a href={`mailto:${contact.email}`}>{contact.email}</a>
+              <a href={`mailto:${contact.xemail}`}>{contact.xemail}</a>
             </div>
           ))}
         </div>
@@ -47,6 +48,7 @@ export const query = graphql`
         name
         role
         email
+        xemail
       }
      
       images {
