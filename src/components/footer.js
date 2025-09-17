@@ -21,11 +21,11 @@ const Footer = () => {
 
   return (
     <footer>
-      <div>
+      <!-- <div>
         <Link to='https://www.instagram.com/metalwater.co/' target='_blank' className='footer-logo'>
           Metal & Water
         </Link>
-      </div>
+      </div> -->
       <div>
         <a href={`mailto:${generalEmail}`}>{generalEmail}</a>
       </div>
