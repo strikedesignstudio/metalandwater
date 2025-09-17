@@ -39,13 +39,6 @@ const Footer = () => {
       </div>
       <div>
         <a
-          href='https://www.instagram.com/metalwater.co/'
-          target='_blank'
-          rel='noreferrer'
-        >
-          @metalwater.co
-        </a>
-        <a
           href='https://mailchi.mp/metalwater/newsletter'
           target='_blank'
           rel='noreferrer'
@@ -73,6 +66,16 @@ const Footer = () => {
             />
           </svg>
         </a>
+                </div>
+                <div>
+                <a
+          href='https://www.instagram.com/metalwater.co/'
+          target='_blank'
+          rel='noreferrer'
+        >
+          @metalwater.co
+        </a>
+            
         <a
           href='https://www.pacificpacific.pub'
           target='_blank'
