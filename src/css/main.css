@@ -477,6 +477,10 @@ About Page
   flex-wrap: wrap;
 }
 
+.about-contact-emails div {
+    margin: 20px 0;
+}
+
 @media screen and (max-width: 700px) {
   .about-text {
     width: 100%;
