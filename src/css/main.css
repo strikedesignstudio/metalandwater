@@ -471,7 +471,6 @@ About Page
 }
 
 .about-contact-emails {
-  display: flex;
   justify-content: space-between;
   margin-top: 1.5rem;
   gap: 1rem;
