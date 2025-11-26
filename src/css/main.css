@@ -48,8 +48,8 @@ html {
   font-weight: var(--primary-weight);
   overflow-x: hidden;
   width: 100vw;
-  background: #fff;
-  color: #000;
+  background: #000;
+  color: #fff;
 }
 
 body {
