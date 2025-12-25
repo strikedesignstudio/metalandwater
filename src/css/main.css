@@ -27,10 +27,10 @@
   --spacing-md: 2rem;
   --spacing-sm: 1rem;
   --spacing-xs: 0.5rem;
-  --background-dark-mode: #000000;
-  --background-light-mode: #ffffff;
-  --color-light-mode: #000000;
-  --color-dark-mode: #ffffff;
+  --background-dark-mode: #ffffff;
+  --background-light-mode: #000000;
+  --color-light-mode: #ffffff;
+  --color-dark-mode: #000000;
   --less-opacity: 0.5;
   --fast-transition: 400ms;
   --md-transition: 700ms;
@@ -48,8 +48,8 @@ html {
   font-weight: var(--primary-weight);
   overflow-x: hidden;
   width: 100vw;
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
 }
 
 body {
