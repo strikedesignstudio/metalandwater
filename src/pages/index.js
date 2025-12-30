@@ -7,16 +7,25 @@ import Mission from '../components/mission'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const Index = () => {
+  const [showContent, setShowContent] = useState(false)
+
   return (
     <>
-      <Splash></Splash>
+      <Splash onFinish={() => setShowContent(true)} />
+
       <AnimatePresence>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <Layout>
-            <HomeSlider />
-            <Mission />
-          </Layout>
-        </motion.div>
+        {showContent && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <Layout>
+              <HomeSlider />
+              <Mission />
+            </Layout>
+          </motion.div>
+        )}
       </AnimatePresence>
     </>
   )
