@@ -35,14 +35,14 @@ const Header = () => {
             <span></span>
             <span></span>
           </button>
-          <ul className='desktop-page-links'>
+         <!-- <ul className='desktop-page-links'>
             <li>
               <Link to='/about'>Metal & Water</Link>
             </li>
             <li>
               <Link to='/calendar'>What's On</Link>
             </li>
-          </ul>
+          </ul> --> 
         </div>
         <ul className={`mobile-page-links ${isOpen ? 'show' : 'hide'}`}>
           <li>
