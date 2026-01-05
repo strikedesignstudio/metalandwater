@@ -123,6 +123,10 @@ h2 {
   margin-bottom: var(--spacing-md);
 }
 
+h3 {
+  font-size:1em !important;
+}
+
 /*
 ==========
 HEADER
