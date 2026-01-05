@@ -823,6 +823,7 @@ Splash
 
 .splash-container {
   z-index: 550;
+  background-color: #fff; 
   width: 100vw;
   height: 100vh;
   position: fixed;
