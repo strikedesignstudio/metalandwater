@@ -155,7 +155,7 @@ header li {
 }
 
 .nav-logo {
-  width: clamp(80px, 20vw, 200px);
+  width: clamp(80px, 20vw, 250px);
 }
 
 #nav-icon {
