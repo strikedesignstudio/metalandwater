@@ -170,6 +170,7 @@ header li {
   -moz-transition: 0.5s ease-in-out;
   -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
+  display: none;
 }
 
 #nav-icon span {
