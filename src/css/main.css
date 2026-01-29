@@ -287,10 +287,7 @@ header li {
     display: inline-block;
     margin-left: 50px;
   }
-  .home-slide-image {
-  height: 90vh;
-    object-fit: cover;
-  }
+
 }
 
 @media screen and (min-width: 1000px) {
@@ -448,8 +445,13 @@ HOME
     height: 55px;
     padding: 20px;
   }
+    .home-slide-image {
+  height: 100% !important;
+    object-fit: cover !important;
+  }
+  
   .home-slide-container {
-  height: 90vh;
+  height: 90vh !important;
 }
 
 }
