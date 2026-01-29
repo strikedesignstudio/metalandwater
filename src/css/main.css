@@ -448,6 +448,10 @@ HOME
     height: 55px;
     padding: 20px;
   }
+  .home-slide-container {
+  height: 90vh;
+}
+
 }
 
 /*
