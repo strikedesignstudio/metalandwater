@@ -26,15 +26,7 @@ const Header = () => {
               />
             </svg>
           </Link>
-         <!-- <button
-            id='nav-icon'
-            className={`${isOpen ? 'open' : ''}`}
-            onClick={toggleSidebar}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button> -->
+
          <ul className='desktop-page-links'>
             <li>
               <Link to=''></Link>
