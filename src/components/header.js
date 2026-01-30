@@ -26,7 +26,7 @@ const Header = () => {
               />
             </svg>
           </Link>
-          <button
+         <!-- <button
             id='nav-icon'
             className={`${isOpen ? 'open' : ''}`}
             onClick={toggleSidebar}
@@ -34,7 +34,7 @@ const Header = () => {
             <span></span>
             <span></span>
             <span></span>
-          </button>
+          </button> -->
          <ul className='desktop-page-links'>
             <li>
               <Link to=''></Link>
