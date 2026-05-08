@@ -80,8 +80,8 @@ const HomeSlider = () => {
   }, [height])
 
   const settings = {
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow: 6,
+    slidesToScroll: 6,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 5000,
