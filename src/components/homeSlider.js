@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import useWindowSize from '../utils/useWindowSize'
 
-const FADE = 1200
-const HOLD_IMAGE = 5000
-const OVERLAP = 0.6
+// Crossfade duration in ms — tweak to taste
+const FADE_MS = 900
 
 const HomeSlider = () => {
   const data = useStaticQuery(graphql`
@@ -15,9 +13,7 @@ const HomeSlider = () => {
           ... on ContentfulImageWrapper {
             id
             imageCredit
-
             image {
-              gatsbyImageData
               file {
                 url
                 contentType
@@ -29,282 +25,154 @@ const HomeSlider = () => {
     }
   `)
 
-  const raw =
-    data?.contentfulHomePage?.carouselImages || []
-
+  const raw = data?.contentfulHomePage?.carouselImages || []
   const { width, height } = useWindowSize()
   const isMobile = width < 601
 
-  const [h, setH] = useState(800)
-
-  const videoRefs = useRef([])
-  const indexRef = useRef(0)
-  const runningRef = useRef(false)
-
-  useEffect(() => {
-    setH(height)
-  }, [height])
-
-  // -----------------------------
-  // NORMALISE CONTENTFUL DATA
-  // -----------------------------
+  // ─── Normalise slides ───────────────────────────────────────────────────────
   const slides = raw
     .map((item) => {
-      const file =
-        item?.image?.file ||
-        item?.image?.image?.file
-
-      const isVideo =
-        file?.contentType?.startsWith('video')
-
+      const file = item?.image?.file || item?.image?.image?.file
       return {
-        id: item.id,
+        id:     item.id,
         credit: item.imageCredit,
-        url: file?.url
-          ? `https:${file.url}`
-          : null,
-        type: file?.contentType,
-        isVideo,
-        image:
-          item?.image?.gatsbyImageData || null,
+        url:    file?.url ? `https:${file.url}` : null,
+        type:   file?.contentType,
       }
     })
-    .filter((s) => s.url || s.image)
+    .filter((s) => s.url)
 
-  // -----------------------------
-  // PRELOAD VIDEO
-  // -----------------------------
-  const preloadVideo = (video) =>
-    new Promise((resolve) => {
-      if (!video) return resolve()
+  // ─── State ──────────────────────────────────────────────────────────────────
+  // `current`    – the slide now visible / fading IN
+  // `fadingFrom` – the slide fading OUT (null when stable)
+  const [current,    setCurrent]    = useState(0)
+  const [fadingFrom, setFadingFrom] = useState(null)
 
-      if (video.readyState >= 3)
-        return resolve()
+  const videoRefs      = useRef([])
+  const isFadingRef    = useRef(false)   // guard against double-triggers
+  const fadeTimerRef   = useRef(null)
 
-      video.load()
-      video.oncanplaythrough = () => resolve()
-    })
-
-  // -----------------------------
-  // BOOT FIRST VIDEO (CRITICAL FIX)
-  // -----------------------------
+  // ─── Boot: play first video ─────────────────────────────────────────────────
   useEffect(() => {
-    const first = videoRefs.current[0]
-    if (!first) return
+    const v = videoRefs.current[0]
+    if (!v) return
 
-    const start = async () => {
-      try {
-        first.currentTime = 0
-        await first.play()
-      } catch (e) {
-        console.log('autoplay blocked')
-      }
+    const attempt = () => {
+      v.currentTime = 0
+      v.play().catch(() => {
+        // Autoplay blocked — wait for user gesture then retry
+        const resume = () => { v.play().catch(() => {}); document.removeEventListener('click', resume) }
+        document.addEventListener('click', resume, { once: true })
+      })
     }
 
-    const t = setTimeout(start, 200)
+    // Small delay lets the DOM settle
+    const t = setTimeout(attempt, 150)
     return () => clearTimeout(t)
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slides.length])
 
-  // -----------------------------
-  // PLAY ENGINE
-  // -----------------------------
+  // ─── Preload: always keep the NEXT video buffered ───────────────────────────
   useEffect(() => {
-    if (!slides.length || runningRef.current)
-      return
+    if (!slides.length) return
+    const nextIdx  = (current + 1) % slides.length
+    const nextVideo = videoRefs.current[nextIdx]
+    if (nextVideo && nextVideo.preload !== 'auto') {
+      nextVideo.preload = 'auto'
+      nextVideo.load()
+    }
+  }, [current, slides.length])
 
-    runningRef.current = true
-    let cancelled = false
+  // ─── Transition to next slide ───────────────────────────────────────────────
+  const advance = useCallback((fromIdx) => {
+    if (isFadingRef.current) return
+    if (fromIdx !== current)  return   // stale onEnded from a previous slide
 
-    const run = async () => {
-      while (!cancelled) {
-        const i = indexRef.current
-        const next =
-          (i + 1) % slides.length
+    isFadingRef.current = true
+    clearTimeout(fadeTimerRef.current)
 
-        const current = slides[i]
-        const nextSlide = slides[next]
+    const nextIdx   = (fromIdx + 1) % slides.length
+    const nextVideo = videoRefs.current[nextIdx]
 
-        const currentVideo =
-          videoRefs.current[i]
+    // Start the incoming video immediately so it's playing behind the fade
+    if (nextVideo) {
+      nextVideo.currentTime = 0
+      nextVideo.play().catch(() => {})
+    }
 
-        const nextVideo =
-          videoRefs.current[next]
+    // Swap state in one batch → CSS transitions fire simultaneously
+    setFadingFrom(fromIdx)
+    setCurrent(nextIdx)
 
-        // -------------------------
-        // IMAGE MODE
-        // -------------------------
-        if (!current.isVideo) {
-          await new Promise((r) =>
-            setTimeout(r, HOLD_IMAGE)
-          )
-          indexRef.current = next
-          continue
-        }
-
-        // -------------------------
-        // VIDEO MODE
-        // -------------------------
-        if (!currentVideo) {
-          indexRef.current = next
-          continue
-        }
-
-        await preloadVideo(currentVideo)
-
-        currentVideo.currentTime = 0
-
-        // safe play
-        try {
-          const p =
-            currentVideo.play()
-          if (p?.catch)
-            await p.catch(() => {})
-        } catch (e) {}
-
-        // preload next
-        if (
-          nextSlide.isVideo &&
-          nextVideo
-        ) {
-          preloadVideo(nextVideo)
-        }
-
-        // -------------------------
-        // WAIT FOR CROSSFADE POINT
-        // -------------------------
-        await new Promise((resolve) => {
-          const check = () => {
-            if (cancelled)
-              return resolve()
-
-            if (
-              !currentVideo.duration ||
-              currentVideo.paused
-            ) {
-              requestAnimationFrame(
-                check
-              )
-              return
-            }
-
-            const remaining =
-              currentVideo.duration -
-              currentVideo.currentTime
-
-            if (remaining <= OVERLAP) {
-              resolve()
-            } else {
-              requestAnimationFrame(
-                check
-              )
-            }
-          }
-
-          check()
-        })
-
-        // -------------------------
-        // CROSSFADE NEXT
-        // -------------------------
-        if (
-          nextSlide.isVideo &&
-          nextVideo
-        ) {
-          nextVideo.currentTime = 0
-
-          try {
-            const p =
-              nextVideo.play()
-            if (p?.catch)
-              await p.catch(() => {})
-          } catch (e) {}
-        }
-
-        setTimeout(() => {
-          currentVideo?.pause()
-        }, FADE)
-
-        indexRef.current = next
+    // After fade completes, clean up
+    fadeTimerRef.current = setTimeout(() => {
+      const oldVideo = videoRefs.current[fromIdx]
+      if (oldVideo) {
+        oldVideo.pause()
+        oldVideo.currentTime = 0
       }
-    }
+      setFadingFrom(null)
+      isFadingRef.current = false
+    }, FADE_MS + 50) // slight buffer past the CSS transition
+  }, [current, slides.length])
 
-    run()
+  // ─── Cleanup on unmount ─────────────────────────────────────────────────────
+  useEffect(() => () => clearTimeout(fadeTimerRef.current), [])
 
-    return () => {
-      cancelled = true
-      runningRef.current = false
-    }
-  }, [slides])
-
-  // -----------------------------
-  // RENDER
-  // -----------------------------
+  // ─── Render ─────────────────────────────────────────────────────────────────
   return (
     <div
       className="home-slider-container"
       style={{
-        height: isMobile
-          ? `${h}px`
-          : '100vh',
+        position: 'relative',
+        overflow: 'hidden',
+        background: '#000',
+        height: isMobile ? `${height}px` : '100vh',
       }}
     >
       {slides.map((s, i) => {
-        const active =
-          i === indexRef.current
+        /*
+         * Opacity rules:
+         *   stable  →  current = 1,  everything else = 0
+         *   fading  →  fadingFrom = 0 (animates out),  current = 1 (animates in)
+         */
+        const isActive   = i === current
+        const isFadingOut = i === fadingFrom
+
+        const opacity = isActive || isFadingOut
+          ? isActive ? 1 : 0
+          : 0
+
+        const zIndex = isActive ? 2 : isFadingOut ? 1 : 0
 
         return (
           <div
             key={s.id}
-            className="cinema-slide"
             style={{
-              position: 'absolute',
-              inset: 0,
-              opacity: active ? 1 : 0,
-              transition:
-                'opacity 1.2s ease',
+              position:   'absolute',
+              inset:       0,
+              opacity,
+              zIndex,
+              transition: `opacity ${FADE_MS}ms ease`,
             }}
           >
-            {/* IMAGE */}
-            {!s.isVideo && (
-              <GatsbyImage
-                image={s.image}
-                alt=""
-                className="home-slide-image"
-              />
-            )}
+            {/* Video */}
+            <video
+              ref={(el) => (videoRefs.current[i] = el)}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              muted
+              playsInline
+              preload={i === 0 ? 'auto' : 'none'}
+              onEnded={() => advance(i)}
+            >
+              <source src={s.url} type={s.type} />
+            </video>
 
-            {/* VIDEO */}
-            {s.isVideo && (
-              <video
-                ref={(el) =>
-                  (videoRefs.current[i] = el)
-                }
-                className="home-slide-image"
-                muted
-                playsInline
-                preload={
-                  i === 0
-                    ? 'auto'
-                    : 'none'
-                }
-                autoPlay={
-                  i === 0
-                }
-              >
-                <source
-                  src={s.url}
-                  type={s.type}
-                />
-              </video>
-            )}
-
-            {/* OVERLAY */}
+            {/* PNG overlay (sits between video and credit via z-index in CSS) */}
             <div className="image-overlay" />
 
-            {/* CREDIT */}
-            <p className="home-credit">
-              {s.credit}
-            </p>
+            {/* Credit */}
+            <p className="home-credit">{s.credit}</p>
           </div>
         )
       })}
