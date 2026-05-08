@@ -1,24 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { graphql, useStaticQuery } from 'gatsby'
 import useWindowSize from '../utils/useWindowSize'
 
-const FADE_DURATION = 1200
-const OVERLAP_TIME = 0.6
+const FADE = 1200
+const OVERLAP = 0.6
 
 const HomeSlider = () => {
   const data = useStaticQuery(graphql`
     query {
       contentfulHomePage {
         carouselImages {
-          id
-          imageCredit
-          image {
-            description
-            gatsbyImageData
-            file {
-              url
-              contentType
+          ... on ContentfulImageWrapper {
+            id
+            imageCredit
+
+            image {
+              gatsbyImageData
+              file {
+                url
+                contentType
+              }
             }
           }
         }
@@ -26,99 +28,119 @@ const HomeSlider = () => {
     }
   `)
 
-  const slides =
+  const rawSlides =
     data?.contentfulHomePage?.carouselImages || []
 
   const { width, height } = useWindowSize()
   const isMobile = width < 601
 
-  const [initialHeight, setInitialHeight] =
-    useState(800)
+  const [h, setH] = useState(800)
 
   const videoRefs = useRef([])
   const indexRef = useRef(0)
   const runningRef = useRef(false)
 
   useEffect(() => {
-    setInitialHeight(height)
+    setH(height)
   }, [height])
 
-  const isVideo = (item) =>
-    item?.image?.file?.contentType?.startsWith('video')
+  // -------------------------
+  // 1. NORMALISE CONTENTFUL
+  // -------------------------
+  const slides = rawSlides
+    .map((item) => {
+      const file =
+        item?.image?.file ||
+        item?.image?.image?.file
 
-  const preloadVideo = (video) =>
-    new Promise((resolve) => {
-      if (!video) return resolve()
+      const isVideo =
+        file?.contentType?.startsWith('video')
 
-      if (video.readyState >= 3) return resolve()
+      return {
+        id: item.id,
+        credit: item.imageCredit,
+        url: file?.url ? `https:${file.url}` : null,
+        type: file?.contentType,
+        isVideo,
+        gatsbyImageData:
+          item?.image?.gatsbyImageData,
+      }
+    })
+    .filter((s) => s.url || s.gatsbyImageData)
+
+  // -------------------------
+  // 2. PRELOAD VIDEO
+  // -------------------------
+  const preload = (video) =>
+    new Promise((res) => {
+      if (!video) return res()
+
+      if (video.readyState >= 3) return res()
 
       video.load()
-      video.oncanplaythrough = () => resolve()
+      video.oncanplaythrough = () => res()
     })
 
+  // -------------------------
+  // 3. PLAY ENGINE (NO STATE DEPENDENCY)
+  // -------------------------
   useEffect(() => {
     if (!slides.length || runningRef.current) return
 
     runningRef.current = true
-
     let cancelled = false
 
     const run = async () => {
       while (!cancelled) {
-        const currentIndex = indexRef.current
-        const nextIndex =
-          (currentIndex + 1) % slides.length
+        const i = indexRef.current
+        const next = (i + 1) % slides.length
 
-        const currentItem = slides[currentIndex]
-        const nextItem = slides[nextIndex]
+        const current = slides[i]
+        const nextSlide = slides[next]
 
         const currentVideo =
-          videoRefs.current[currentIndex]
+          videoRefs.current[i]
 
         const nextVideo =
-          videoRefs.current[nextIndex]
+          videoRefs.current[next]
 
-        const currentIsVideo = isVideo(currentItem)
-        const nextIsVideo = isVideo(nextItem)
-
-        // ---------------------------
+        // -------------------
         // IMAGE MODE
-        // ---------------------------
-        if (!currentIsVideo) {
+        // -------------------
+        if (!current.isVideo) {
           await new Promise((r) =>
             setTimeout(r, 5000)
           )
-
-          indexRef.current = nextIndex
+          indexRef.current = next
           continue
         }
 
-        // ---------------------------
-        // VIDEO MODE SAFETY CHECK
-        // ---------------------------
+        // -------------------
+        // VIDEO MODE SAFETY
+        // -------------------
         if (!currentVideo) {
-          indexRef.current = nextIndex
+          indexRef.current = next
           continue
         }
 
-        // preload + reset
-        await preloadVideo(currentVideo)
+        await preload(currentVideo)
+
         currentVideo.currentTime = 0
 
         try {
           await currentVideo.play()
-        } catch (e) {
-          console.log('play error:', e)
+        } catch (e) {}
+
+        if (
+          nextSlide.isVideo &&
+          nextVideo
+        ) {
+          preload(nextVideo)
         }
 
-        // preload next
-        if (nextIsVideo && nextVideo) {
-          preloadVideo(nextVideo)
-        }
-
-        // ---------------------------
-        // WAIT FOR CROSSFADE MOMENT
-        // ---------------------------
+        // -------------------
+        // WAIT FOR OVERLAP POINT
+        // -------------------
         await new Promise((resolve) => {
           const check = () => {
             if (cancelled) return resolve()
@@ -135,7 +157,7 @@ const HomeSlider = () => {
               currentVideo.duration -
               currentVideo.currentTime
 
-            if (remaining <= OVERLAP_TIME) {
+            if (remaining <= OVERLAP) {
               resolve()
             } else {
               requestAnimationFrame(check)
@@ -145,24 +167,22 @@ const HomeSlider = () => {
           check()
         })
 
-        // ---------------------------
+        // -------------------
         // CROSSFADE
-        // ---------------------------
-        if (nextIsVideo && nextVideo) {
+        // -------------------
+        if (
+          nextSlide.isVideo &&
+          nextVideo
+        ) {
           nextVideo.currentTime = 0
-
-          try {
-            await nextVideo.play()
-          } catch (e) {
-            console.log(e)
-          }
+          nextVideo.play()
         }
 
         setTimeout(() => {
-          if (currentVideo) currentVideo.pause()
-        }, FADE_DURATION)
+          currentVideo?.pause()
+        }, FADE)
 
-        indexRef.current = nextIndex
+        indexRef.current = next
       }
     }
 
@@ -174,76 +194,71 @@ const HomeSlider = () => {
     }
   }, [slides])
 
+  // -------------------------
+  // 4. RENDER
+  // -------------------------
   return (
     <div
       className="home-slider-container"
       style={{
         height: isMobile
-          ? `${initialHeight}px`
+          ? `${h}px`
           : '100vh',
       }}
     >
-      {slides.map((item, index) => {
-        const isActive =
-          index === indexRef.current
-
-        const video = isVideo(item)
+      {slides.map((s, i) => {
+        const active =
+          i === indexRef.current
 
         return (
           <div
-            key={item.id}
+            key={s.id}
             className="cinema-slide"
             style={{
               position: 'absolute',
               inset: 0,
-              opacity: isActive ? 1 : 0,
+              opacity: active ? 1 : 0,
               transition:
                 'opacity 1.2s ease',
             }}
           >
-            {/* OVERLAY */}
-            <StaticImage
-              src="../images/overlay.png"
-              alt=""
-              className="image-overlay"
-            />
+            {/* IMAGE */}
+            {!s.isVideo && (
+              <GatsbyImage
+                image={s.gatsbyImageData}
+                alt=""
+                className="home-slide-image"
+              />
+            )}
 
-            {/* MEDIA */}
-            {video ? (
+            {/* VIDEO */}
+            {s.isVideo && (
               <video
                 ref={(el) =>
-                  (videoRefs.current[index] = el)
+                  (videoRefs.current[i] = el)
                 }
                 className="home-slide-image"
                 muted
                 playsInline
                 preload={
-                  index === 0
+                  i === 0
                     ? 'auto'
                     : 'none'
                 }
               >
                 <source
-                  src={`https:${item.image.file.url}`}
-                  type={
-                    item.image.file
-                      .contentType
-                  }
+                  src={s.url}
+                  type={s.type}
                 />
               </video>
-            ) : (
-              <GatsbyImage
-                image={
-                  item.image.gatsbyImageData
-                }
-                alt={item.image.description || ''}
-                className="home-slide-image"
-              />
             )}
+
+            {/* OVERLAY */}
+            <div className="image-overlay" />
 
             {/* CREDIT */}
             <p className="home-credit">
-              {item.imageCredit}
+              {s.credit}
             </p>
           </div>
         )
