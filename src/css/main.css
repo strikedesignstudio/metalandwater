@@ -395,17 +395,23 @@ HOME
 }
 
 .home-slider-container {
+  position: relative;
+  height: 100vh;
   width: 100vw;
+  overflow: hidden;
 }
 
 .home-slide-container {
-  position: relative;
-  width: 100%;
+  position: absolute;
+  inset: 0;
+  height: 100%;
 }
 
 .home-slide-image {
   width: 100%;
-  filter: grayscale(100%);
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .about-image {
@@ -879,69 +885,3 @@ Splash
   }
 }
 
-/* amend */
-
-.home-slider-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background: black;
-}
-
-.cinema-slide {
-  position: absolute;
-  inset: 0;
-
-  opacity: 0;
-  transition: opacity 1.2s ease;
-
-  pointer-events: none;
-}
-
-.cinema-slide.active {
-  opacity: 1;
-  z-index: 2;
-}
-
-.home-slide-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.image-overlay {
-  position: absolute !important;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.home-credit {
-  position: absolute;
-  left: 32px;
-  bottom: 32px;
-
-  z-index: 4;
-
-  color: white;
-  font-size: 13px;
-  line-height: 1.4;
-  letter-spacing: 0.03em;
-
-  padding: 10px 14px;
-
-  background: rgba(0, 0, 0, 0.24);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-@media (max-width: 600px) {
-  .home-credit {
-    left: 20px;
-    bottom: 20px;
-    font-size: 11px;
-  }
-}
