@@ -1,54 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import Slider from 'react-slick'
+import React, { useEffect, useRef, useState } from 'react'
 import { GatsbyImage, StaticImage } from 'gatsby-plugin-image'
 import { graphql, useStaticQuery } from 'gatsby'
 import useWindowSize from '../utils/useWindowSize'
 
-function NextArrow(props) {
-  const { onClick } = props
-  return (
-    <div
-      className={props.addClassName}
-      onClick={onClick}
-      onKeyDown={onClick}
-      role="button"
-      tabIndex={0}
-      aria-label="go to next"
-    >
-      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="hero-svg">
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M100 0C44.7715 0 0 44.7715 0 100C0 155.229 44.7715 200 100 200C155.229 200 200 155.229 200 100C200 44.7715 155.229 0 100 0ZM65.5967 154.604L144.097 108.104L158.86 99.3574L143.973 90.8242L65.4731 45.8242L55.5269 63.1758L119.14 99.6426L55.4033 137.396L65.5967 154.604Z"
-          fill="white"
-        />
-      </svg>
-    </div>
-  )
-}
-
-function PrevArrow(props) {
-  const { onClick } = props
-  return (
-    <div
-      className={props.addClassName}
-      onClick={onClick}
-      onKeyDown={onClick}
-      role="button"
-      tabIndex={0}
-      aria-label="go to previous"
-    >
-      <svg className="hero-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M100 200C155.229 200 200 155.229 200 100C200 44.7715 155.229 0 100 0C44.7715 0 0 44.7715 0 100C0 155.229 44.7715 200 100 200ZM134.403 45.3965L55.9033 91.8965L41.1396 100.643L56.0269 109.176L134.527 154.176L144.473 136.824L80.8604 100.357L144.597 62.6035L134.403 45.3965Z"
-          fill="white"
-        />
-      </svg>
-    </div>
-  )
-}
+const FADE_DURATION = 1200
+const OVERLAP_TIME = 0.6
 
 const HomeSlider = () => {
   const data = useStaticQuery(graphql`
@@ -70,73 +26,182 @@ const HomeSlider = () => {
     }
   `)
 
-  const images = data.contentfulHomePage.carouselImages
+  const slides = data.contentfulHomePage.carouselImages
+
   const { width, height } = useWindowSize()
-  const [initialHeight, setInitialHeight] = useState(800)
+
   const isMobile = width < 601
+
+  const [initialHeight, setInitialHeight] = useState(800)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const videoRefs = useRef([])
 
   useEffect(() => {
     setInitialHeight(height)
   }, [height])
 
-  const settings = {
-    slidesToShow: 6,
-    slidesToScroll: 6,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    useTransform: false,
-    nextArrow: <NextArrow addClassName="next-button home-next-button" />,
-    prevArrow: <PrevArrow addClassName="prev-button home-prev-button" />,
+  // PRELOAD VIDEO
+  const preloadVideo = (video) => {
+    return new Promise((resolve) => {
+      if (!video) return resolve()
+
+      if (video.readyState >= 3) {
+        resolve()
+      } else {
+        video.load()
+
+        video.addEventListener(
+          'canplaythrough',
+          () => resolve(),
+          { once: true }
+        )
+      }
+    })
   }
+
+  // PLAY SEQUENCE
+  useEffect(() => {
+    let animationFrame
+
+    const playSequence = async () => {
+      const currentVideo = videoRefs.current[activeIndex]
+
+      if (!currentVideo) return
+
+      await preloadVideo(currentVideo)
+
+      currentVideo.currentTime = 0
+
+      try {
+        await currentVideo.play()
+      } catch (err) {
+        console.log(err)
+      }
+
+      // preload NEXT video
+      const nextIndex =
+        (activeIndex + 1) % slides.length
+
+      const nextVideo =
+        videoRefs.current[nextIndex]
+
+      preloadVideo(nextVideo)
+
+      const monitor = () => {
+        if (!currentVideo.duration) {
+          animationFrame =
+            requestAnimationFrame(monitor)
+
+          return
+        }
+
+        const remaining =
+          currentVideo.duration -
+          currentVideo.currentTime
+
+        // CROSSFADE
+        if (
+          remaining <= OVERLAP_TIME &&
+          remaining > 0
+        ) {
+          if (nextVideo) {
+            nextVideo.currentTime = 0
+
+            nextVideo.play()
+
+            setTimeout(() => {
+              currentVideo.pause()
+
+              setActiveIndex(nextIndex)
+            }, FADE_DURATION)
+          }
+
+          return
+        }
+
+        animationFrame =
+          requestAnimationFrame(monitor)
+      }
+
+      monitor()
+    }
+
+    playSequence()
+
+    return () => {
+      cancelAnimationFrame(animationFrame)
+    }
+  }, [activeIndex, slides.length])
 
   return (
     <div
       className="home-slider-container"
-      style={{ height: isMobile ? `${initialHeight}px` : '100vh' }}
+      style={{
+        height: isMobile
+          ? `${initialHeight}px`
+          : '100vh',
+      }}
     >
-      <Slider
-        {...settings}
-        className="home-slider"
-        style={{ height: isMobile ? `${initialHeight}px` : '100vh' }}
-      >
-        {images?.map((item) => {
-          const isVideo = item?.image?.file?.contentType === 'video/webm'
+      {slides?.map((item, index) => {
+        const isVideo =
+          item?.image?.file?.contentType ===
+          'video/webm'
 
-          return (
-            <div className="home-slide-container" key={item.id}>
-              <StaticImage
-                src="../images/overlay.png"
-                className="image-overlay"
-                style={{ height: isMobile ? `${initialHeight}px` : '100vh' }}
+        const isActive = index === activeIndex
+
+        return (
+          <div
+            key={item.id}
+            className={`cinema-slide ${
+              isActive ? 'active' : ''
+            }`}
+            style={{
+              height: isMobile
+                ? `${initialHeight}px`
+                : '100vh',
+            }}
+          >
+            <StaticImage
+              src="../images/overlay.png"
+              className="image-overlay"
+              alt=""
+              style={{
+                height: isMobile
+                  ? `${initialHeight}px`
+                  : '100vh',
+              }}
+            />
+
+            {isVideo ? (
+              <video
+                ref={(el) =>
+                  (videoRefs.current[index] = el)
+                }
+                className="home-slide-image"
+                src={item.image.file.url}
+                muted
+                playsInline
+                preload={index === 0 ? 'auto' : 'none'}
               />
+            ) : (
+              <GatsbyImage
+                image={item.image.gatsbyImageData}
+                alt={
+                  item.image.description || ''
+                }
+                className="home-slide-image"
+              />
+            )}
 
-              {isVideo ? (
-                <video
-                  className="home-slide-image"
-                  src={item.image.file.url}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                />
-              ) : (
-                <GatsbyImage
-                  image={item.image.gatsbyImageData}
-                  alt={item.image.description || ''}
-                  className="home-slide-image"
-                />
-              )}
-
-              <p className="home-credit">{item.imageCredit}</p>
-            </div>
-          )
-        })}
-      </Slider>
+            <p className="home-credit">
+              {item.imageCredit}
+            </p>
+          </div>
+        )
+      })}
     </div>
   )
 }
 
 export default HomeSlider
-
