@@ -13,15 +13,9 @@ const HomeSlider = () => {
         carouselImages {
           id
           imageCredit
-
           image {
             description
-
-            gatsbyImageData(
-              placeholder: NONE
-              layout: FULL_WIDTH
-            )
-
+            gatsbyImageData
             file {
               url
               contentType
@@ -36,148 +30,136 @@ const HomeSlider = () => {
     data?.contentfulHomePage?.carouselImages || []
 
   const { width, height } = useWindowSize()
-
   const isMobile = width < 601
 
   const [initialHeight, setInitialHeight] =
     useState(800)
 
-  const [activeIndex, setActiveIndex] =
-    useState(0)
-
   const videoRefs = useRef([])
+  const indexRef = useRef(0)
+  const runningRef = useRef(false)
 
   useEffect(() => {
     setInitialHeight(height)
   }, [height])
 
-  // PRELOAD VIDEO
-  const preloadVideo = (video) => {
-    return new Promise((resolve) => {
-      if (!video) {
-        resolve()
-        return
-      }
+  const preloadVideo = (video) =>
+    new Promise((resolve) => {
+      if (!video) return resolve()
 
-      if (video.readyState >= 3) {
-        resolve()
-        return
-      }
+      if (video.readyState >= 3) return resolve()
 
       video.load()
-
-      video.addEventListener(
-        'canplaythrough',
-        () => resolve(),
-        { once: true }
-      )
+      video.oncanplaythrough = () => resolve()
     })
-  }
 
-  // PLAYBACK SEQUENCE
   useEffect(() => {
-    if (!slides.length) return
+    if (!slides.length || runningRef.current) return
 
-    let animationFrame
+    runningRef.current = true
 
-    const playSequence = async () => {
-      const currentSlide = slides[activeIndex]
+    const play = async () => {
+      while (runningRef.current) {
+        const currentIndex = indexRef.current
+        const nextIndex =
+          (currentIndex + 1) % slides.length
 
-      const currentVideo =
-        videoRefs.current[activeIndex]
+        const currentVideo =
+          videoRefs.current[currentIndex]
 
-      // skip if not video
-      const isCurrentVideo =
-        currentSlide?.image?.file?.contentType?.startsWith(
-          'video'
-        )
+        const nextVideo =
+          videoRefs.current[nextIndex]
 
-      // preload next
-      const nextIndex =
-        (activeIndex + 1) % slides.length
+        const currentSlide =
+          slides[currentIndex]
 
-      const nextSlide = slides[nextIndex]
+        const nextSlide =
+          slides[nextIndex]
 
-      const nextVideo =
-        videoRefs.current[nextIndex]
+        const currentIsVideo =
+          currentSlide?.image?.file?.contentType?.startsWith(
+            'video'
+          )
 
-      const isNextVideo =
-        nextSlide?.image?.file?.contentType?.startsWith(
-          'video'
-        )
+        const nextIsVideo =
+          nextSlide?.image?.file?.contentType?.startsWith(
+            'video'
+          )
 
-      // VIDEO LOGIC
-      if (isCurrentVideo && currentVideo) {
+        // IMAGE MODE (simple timeout)
+        if (!currentIsVideo) {
+          await new Promise((r) =>
+            setTimeout(r, 5000)
+          )
+          indexRef.current = nextIndex
+          continue
+        }
+
+        // VIDEO MODE
+        if (!currentVideo) {
+          indexRef.current = nextIndex
+          continue
+        }
+
         await preloadVideo(currentVideo)
 
         currentVideo.currentTime = 0
 
         try {
           await currentVideo.play()
-        } catch (err) {
-          console.log(err)
+        } catch (e) {
+          console.log(e)
         }
 
-        // preload next video while current plays
-        if (isNextVideo && nextVideo) {
+        if (nextIsVideo && nextVideo) {
           preloadVideo(nextVideo)
         }
 
-        const monitor = () => {
-          if (
-            !currentVideo.duration ||
-            currentVideo.paused
-          ) {
-            animationFrame =
-              requestAnimationFrame(monitor)
-
-            return
-          }
-
-          const remaining =
-            currentVideo.duration -
-            currentVideo.currentTime
-
-          // START CROSSFADE
-          if (
-            remaining <= OVERLAP_TIME &&
-            remaining > 0
-          ) {
-            // next is video
-            if (isNextVideo && nextVideo) {
-              nextVideo.currentTime = 0
-
-              nextVideo.play()
+        // WAIT UNTIL CROSSFADE MOMENT
+        await new Promise((resolve) => {
+          const check = () => {
+            if (
+              !currentVideo.duration ||
+              currentVideo.paused
+            ) {
+              requestAnimationFrame(check)
+              return
             }
 
-            setTimeout(() => {
-              currentVideo.pause()
+            const remaining =
+              currentVideo.duration -
+              currentVideo.currentTime
 
-              setActiveIndex(nextIndex)
-            }, FADE_DURATION)
-
-            return
+            if (remaining <= OVERLAP_TIME) {
+              resolve()
+            } else {
+              requestAnimationFrame(check)
+            }
           }
 
-          animationFrame =
-            requestAnimationFrame(monitor)
+          check()
+        })
+
+        // CROSSFADE
+        if (nextIsVideo && nextVideo) {
+          nextVideo.currentTime = 0
+          nextVideo.play()
         }
 
-        monitor()
-      } else {
-        // IMAGE LOGIC
         setTimeout(() => {
-          setActiveIndex(nextIndex)
-        }, 5000)
+          currentVideo.pause()
+        }, FADE_DURATION)
+
+        indexRef.current = nextIndex
       }
     }
 
-    playSequence()
+    play()
 
     return () => {
-      cancelAnimationFrame(animationFrame)
+      runningRef.current = false
     }
-  }, [activeIndex, slides])
+  }, [slides])
 
   return (
     <div
@@ -189,40 +171,32 @@ const HomeSlider = () => {
       }}
     >
       {slides.map((item, index) => {
-        const contentType =
-          item?.image?.file?.contentType || ''
-
         const isVideo =
-          contentType.startsWith('video')
+          item?.image?.file?.contentType?.startsWith(
+            'video'
+          )
 
         const isActive =
-          index === activeIndex
+          index === indexRef.current
 
         return (
           <div
             key={item.id}
-            className={`cinema-slide ${
-              isActive ? 'active' : ''
-            }`}
+            className="cinema-slide"
             style={{
-              height: isMobile
-                ? `${initialHeight}px`
-                : '100vh',
+              opacity: isActive ? 1 : 0,
+              transition:
+                'opacity 1.2s ease',
+              position: 'absolute',
+              inset: 0,
             }}
           >
-            {/* OVERLAY */}
             <StaticImage
               src="../images/overlay.png"
               alt=""
               className="image-overlay"
-              style={{
-                height: isMobile
-                  ? `${initialHeight}px`
-                  : '100vh',
-              }}
             />
 
-            {/* VIDEO */}
             {isVideo ? (
               <video
                 ref={(el) =>
@@ -231,32 +205,26 @@ const HomeSlider = () => {
                 className="home-slide-image"
                 muted
                 playsInline
-                preload={
-                  index === 0
-                    ? 'auto'
-                    : 'none'
-                }
+                preload="auto"
               >
                 <source
                   src={`https:${item.image.file.url}`}
-                  type={contentType}
+                  type={
+                    item.image.file
+                      .contentType
+                  }
                 />
               </video>
             ) : (
-              // IMAGE
               <GatsbyImage
                 image={
-                  item?.image?.gatsbyImageData
+                  item.image.gatsbyImageData
                 }
-                alt={
-                  item?.image?.description ||
-                  ''
-                }
+                alt={item.image.description}
                 className="home-slide-image"
               />
             )}
 
-            {/* CREDIT */}
             <p className="home-credit">
               {item.imageCredit}
             </p>
