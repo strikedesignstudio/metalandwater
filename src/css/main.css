@@ -444,6 +444,7 @@ HOME
   max-width: calc(100% - 20px);
   font-size:14px !Important;
   opacity: 0.75 !important;
+  color:white;
 }
 
 @media screen and (max-width: 750px) {
