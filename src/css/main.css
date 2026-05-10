@@ -433,6 +433,7 @@ HOME
   background-size: cover;
   background-position: center;
   pointer-events: none;
+  top:0;
 }
 
 .hero-svg {
