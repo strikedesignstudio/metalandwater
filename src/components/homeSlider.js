@@ -83,18 +83,18 @@ const HomeSlider = () => {
     }
   }, [current, slides.length])
 
-  // ─── Transition to next slide ───────────────────────────────────────────────
-  const advance = useCallback((fromIdx) => {
+  // ─── Advance to next slide on click ────────────────────────────────────────
+  const advance = useCallback(() => {
     if (isFadingRef.current) return
-    if (fromIdx !== current)  return   // stale onEnded from a previous slide
 
     isFadingRef.current = true
     clearTimeout(fadeTimerRef.current)
 
-    const nextIdx   = (fromIdx + 1) % slides.length
+    const fromIdx = current
+    const nextIdx = (fromIdx + 1) % slides.length
     const nextVideo = videoRefs.current[nextIdx]
 
-    // Start the incoming video immediately so it's playing behind the fade
+    // Start the incoming video from the top
     if (nextVideo) {
       nextVideo.currentTime = 0
       nextVideo.play().catch(() => {})
@@ -104,7 +104,7 @@ const HomeSlider = () => {
     setFadingFrom(fromIdx)
     setCurrent(nextIdx)
 
-    // After fade completes, clean up
+    // After fade completes, clean up the outgoing video
     fadeTimerRef.current = setTimeout(() => {
       const oldVideo = videoRefs.current[fromIdx]
       if (oldVideo) {
@@ -113,7 +113,7 @@ const HomeSlider = () => {
       }
       setFadingFrom(null)
       isFadingRef.current = false
-    }, FADE_MS + 50) // slight buffer past the CSS transition
+    }, FADE_MS + 50)
   }, [current, slides.length])
 
   // ─── Cleanup on unmount ─────────────────────────────────────────────────────
@@ -123,11 +123,13 @@ const HomeSlider = () => {
   return (
     <div
       className="home-slider-container"
+      onClick={advance}
       style={{
         position: 'relative',
         overflow: 'hidden',
         background: '#000',
         height: isMobile ? `${height}px` : '100vh',
+        cursor: 'pointer',
       }}
     >
       {slides.map((s, i) => {
@@ -162,8 +164,8 @@ const HomeSlider = () => {
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               muted
               playsInline
+              loop
               preload={i === 0 ? 'auto' : 'none'}
-              onEnded={() => advance(i)}
             >
               <source src={s.url} type={s.type} />
             </video>
