@@ -426,7 +426,7 @@ HOME
   position: absolute !important;
   z-index: 10;
   opacity: 0.5;
-  background-image: url("/images/overlay.png");
+  background-image: url("../images/overlay.png");
 }
 
 .hero-svg {
