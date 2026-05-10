@@ -428,7 +428,7 @@ HOME
   width: 100%;
   height: 100%;
   z-index: 10;
-  opacity: 0.5;
+  opacity: 0.4;
   background-image: url('../images/overlay.png');
   background-size: cover;
   background-position: center;
