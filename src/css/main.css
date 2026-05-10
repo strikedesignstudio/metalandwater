@@ -151,7 +151,7 @@ header li {
   padding: 1.5rem;
   position: absolute;
   align-items: center !important;
-  display: flex;
+  display: none;
 }
 
 .nav-logo {
@@ -426,7 +426,7 @@ HOME
   position: absolute !important;
   z-index: 10;
   opacity: 0.5;
-  background-image: url("./images/overlay.png");
+  background-image: url('../images/overlay.png');
 }
 
 .hero-svg {
