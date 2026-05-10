@@ -2,7 +2,7 @@ import React from 'react'
 import Seo from '../components/seo'
 import Layout from '../components/layout'
 import HomeSlider from '../components/homeSlider'
-// import Splash from '../components/splash'
+import Splash from '../components/splash'
 import Mission from '../components/mission'
 import { AnimatePresence, motion } from 'framer-motion'
 
