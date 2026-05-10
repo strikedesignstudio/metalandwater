@@ -123,54 +123,15 @@ const HomeSlider = () => {
   return (
     <div
       className="home-slider-container"
+      onClick={advance}
       style={{
         position: 'relative',
         overflow: 'hidden',
         background: '#000',
         height: isMobile ? `${height}px` : '100vh',
+        cursor: 'pointer',
       }}
     >
-      {/* Next arrow */}
-      <button
-        onClick={advance}
-        aria-label="Next video"
-        style={{
-          position:        'absolute',
-          bottom:          '2rem',
-          right:           '2rem',
-          zIndex:          10,
-          display:         'flex',
-          alignItems:      'center',
-          justifyContent:  'center',
-          width:           '48px',
-          height:          '48px',
-          background:      'transparent',
-          border:          '1.5px solid rgba(255,255,255,0.6)',
-          borderRadius:    '50%',
-          cursor:          'pointer',
-          transition:      'border-color 0.2s ease, opacity 0.2s ease',
-          opacity:          0.7,
-        }}
-        onMouseEnter={e => e.currentTarget.style.opacity = 1}
-        onMouseLeave={e => e.currentTarget.style.opacity = 0.7}
-      >
-        {/* Right-pointing chevron */}
-        <svg
-          width="18" height="18"
-          viewBox="0 0 18 18"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <polyline
-            points="6,3 12,9 6,15"
-            stroke="white"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
-
       {slides.map((s, i) => {
         /*
          * Opacity rules:
