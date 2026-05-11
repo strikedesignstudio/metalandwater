@@ -451,6 +451,7 @@ HOME
   max-width: calc(100% - 20px);
   opacity: 0.75 !important;
   color:white;
+  padding:40px;
 }
 
 @media screen and (max-width: 750px) {
