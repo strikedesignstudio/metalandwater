@@ -4,7 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 const Mission = () => {
   const data = useStaticQuery(graphql`
     query {
-      allContentfulArtist(sort: { artist: ASC }) {
+      allContentfulArtist(sort: { fields: [artist], order: ASC }) {
         nodes {
           id
           artist
