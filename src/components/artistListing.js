@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 const ArtistListing = ({ artist }) => {
   return (
     <Link
-      to={`/artist/${artist.slug}`}
+      to={`${artist.slug}`}
       className='artist-listing-item'
     >
       {artist.artist}
