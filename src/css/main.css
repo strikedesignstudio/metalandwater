@@ -136,6 +136,7 @@ HEADER
 header {
   font-family: var(--font-primary);
   font-weight: 400;
+  color:white;
 }
 
 header li {
