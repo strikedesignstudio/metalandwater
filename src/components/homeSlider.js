@@ -123,34 +123,11 @@ const HomeSlider = () => {
   return (
     <div
       className="home-slider-container"
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-        background: '#000',
-        height: isMobile ? `${height}px` : '100vh',
-      }}
     >
       {/* Next arrow */}
       <button
         onClick={advance}
         aria-label="Next video"
-        style={{
-          position:        'absolute',
-          bottom:          '2rem',
-          right:           '2rem',
-          zIndex:          10,
-          display:         'flex',
-          alignItems:      'center',
-          justifyContent:  'center',
-          width:           '48px',
-          height:          '48px',
-          background:      'transparent',
-          border:          '1.5px solid rgba(255,255,255,0.6)',
-          borderRadius:    '50%',
-          cursor:          'pointer',
-          transition:      'border-color 0.2s ease, opacity 0.2s ease',
-          opacity:          0.7,
-        }}
         onMouseEnter={e => e.currentTarget.style.opacity = 1}
         onMouseLeave={e => e.currentTarget.style.opacity = 0.7}
       >
