@@ -4,21 +4,32 @@ import { graphql, useStaticQuery } from 'gatsby'
 const Mission = () => {
   const data = useStaticQuery(graphql`
     query {
-      contentfulAboutPage {
-        mission {
-          childMarkdownRemark {
-            html
-          }
+      allContentfulArtist(sort: { artist: ASC }) {
+        nodes {
+          id
+          artist
+          externalUrl
         }
       }
     }
   `)
-  const {mission} = data.contentfulAboutPage
+
+  const artists = data.allContentfulArtist.nodes
+
   return (
-    <div
-      className='about-mission'
-      dangerouslySetInnerHTML={{ __html: mission?.childMarkdownRemark?.html }}
-    ></div>
+    <div className='about-mission'>
+      {artists.map((artist) => (
+        
+          key={artist.id}
+          href={artist.externalUrl}
+          target='_blank'
+          rel='noreferrer'
+          className='artist-listing-item'
+        >
+          {artist.artist}
+        </a>
+      ))}
+    </div>
   )
 }
 
