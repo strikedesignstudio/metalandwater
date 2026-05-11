@@ -282,6 +282,7 @@ header li {
 
   .navbar ul {
     display: flex;
+    flex: auto;
   }
 
   .navbar ul li a {
