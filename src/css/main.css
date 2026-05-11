@@ -135,7 +135,6 @@ HEADER
 
 header {
   font-family: var(--font-primary);
-  font-size: var(--font-md);
   font-weight: 400;
 }
 
@@ -148,6 +147,7 @@ header li {
   height:auto;
   z-index: 115;
   position: absolute;
+  padding: 40px;
 }
 
 .nav-logo {
@@ -265,7 +265,6 @@ header li {
 }
 
 .mobile-page-links li {
-  font-size: 1.5rem;
   padding: 30px 15px;
 }
 
@@ -277,7 +276,6 @@ header li {
 
   .navbar ul {
     display: flex;
-    font-size: 20px;
   }
 
   .navbar ul li a {
@@ -289,7 +287,6 @@ header li {
 
 @media screen and (min-width: 1000px) {
   .navbar ul {
-    font-size: 24px;
   }
 }
 
@@ -445,7 +442,6 @@ HOME
   left: 10px;
   z-index: 100;
   max-width: calc(100% - 20px);
-  font-size:14px !Important;
   opacity: 0.75 !important;
   color:white;
 }
@@ -559,7 +555,6 @@ Dropdown Text
   gap: 1rem;
   align-items: center;
   width: 35%;
-  font-size: 1.5rem;
   font-weight: 400;
   padding-right: 1rem;
 }
