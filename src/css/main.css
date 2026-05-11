@@ -493,6 +493,8 @@ About Page
   background-color: white;
   position:relative;
   top:100vh;
+  height:75vh;
+  overflow-x:auto;
 }
 
 .about-text {
