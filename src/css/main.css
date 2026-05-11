@@ -43,7 +43,7 @@
 }
 
 html {
-  font-size: 18px;
+  font-size: 14px;
   font-family: var(--font-primary);
   font-weight: var(--primary-weight);
   overflow-x: hidden;
