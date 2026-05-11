@@ -638,7 +638,6 @@ Artists Page
 
 .artist-listing-item {
   transition: all var(--fast-transition);
-      float: left;
     width: 100%;
     color: var(--trans);
     -webkit-text-stroke-width: .01px;
