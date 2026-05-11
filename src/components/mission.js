@@ -20,7 +20,7 @@ const Mission = () => {
     <div className='about-mission'>
       <div className='artist-listing'>
         {artists.map((artist) => (
-          
+          <a
             key={artist.id}
             href={artist.externalUrl}
             target='_blank'
