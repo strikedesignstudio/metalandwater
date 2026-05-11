@@ -29,8 +29,15 @@ const Header = () => {
 
          <ul className='desktop-page-links'>
             <li>
-              <Link to=''></Link>
-            </li>
+            <Link to='#choreographers' onClick={toggleSidebar}>
+             Directors & Choreographers
+            </Link>
+          </li>
+          <li>
+            <Link to='/about' onClick={toggleSidebar}>
+              About
+            </Link>
+          </li>
           </ul> 
         </div>
         <ul className={`mobile-page-links ${isOpen ? 'show' : 'hide'}`}>
@@ -40,8 +47,13 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to='/calendar' onClick={toggleSidebar}>
-              What's On
+            <Link to='#choreographers' onClick={toggleSidebar}>
+             Directors & Choreographers
+            </Link>
+          </li>
+          <li>
+            <Link to='/about' onClick={toggleSidebar}>
+              About
             </Link>
           </li>
         </ul>
