@@ -384,6 +384,16 @@ HOME
   background: #fff;
 }
 
+.home-slider-container button {
+    z-index: 200;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 40px;
+    background-color: transparent;
+    border: none;
+}
+
 .hero-container iframe {
   position: absolute;
   top: 50%;
