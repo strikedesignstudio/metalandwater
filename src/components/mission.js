@@ -26,7 +26,7 @@ const Mission = () => {
   const artists = data.allContentfulArtist.nodes
 
   return (
-    <div className='about-mission'>
+    <div className='about-mission' id='choreographer'>
       <div
         dangerouslySetInnerHTML={{ __html: mission?.childMarkdownRemark?.html }}
       />
