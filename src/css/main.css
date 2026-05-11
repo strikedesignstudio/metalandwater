@@ -148,10 +148,15 @@ header li {
   z-index: 115;
   position: absolute;
   padding: 40px;
+  display:flex;
 }
 
 .nav-logo {
-  width: clamp(80px, 20vw, 250px);
+  width: clamp(50px, 10vw, 150px);
+}
+
+.desktop-page-links li {
+    flex: auto;
 }
 
 #nav-icon {
