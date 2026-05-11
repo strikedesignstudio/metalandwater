@@ -146,12 +146,8 @@ header li {
 .navbar {
   width: 100%;
   height:auto;
-  justify-content: center;
   z-index: 115;
-  padding: 1.5rem;
   position: absolute;
-  align-items: center !important;
-  display: none;
 }
 
 .nav-logo {
