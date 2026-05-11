@@ -1,34 +1,38 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
+import ArtistListing from './artistListing'
 
 const Mission = () => {
   const data = useStaticQuery(graphql`
     query {
-      allContentfulArtist(sort: { fields: [artist], order: ASC }) {
+      contentfulAboutPage {
+        mission {
+          childMarkdownRemark {
+            html
+          }
+        }
+      }
+      allContentfulArtist(sort: { artist: ASC }) {
         nodes {
           id
           artist
-          externalUrl
+          slug
         }
       }
     }
   `)
 
+  const { mission } = data.contentfulAboutPage
   const artists = data.allContentfulArtist.nodes
 
   return (
     <div className='about-mission'>
+      <div
+        dangerouslySetInnerHTML={{ __html: mission?.childMarkdownRemark?.html }}
+      />
       <div className='artist-listing'>
         {artists.map((artist) => (
-          <a
-            key={artist.id}
-            href={artist.externalUrl}
-            target='_blank'
-            rel='noreferrer'
-            className='artist-listing-item'
-          >
-            {artist.artist}
-          </a>
+          <ArtistListing key={artist.id} artist={artist} />
         ))}
       </div>
     </div>
