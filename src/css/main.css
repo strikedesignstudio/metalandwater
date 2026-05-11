@@ -153,7 +153,7 @@ header li {
 }
 
 .nav-logo {
-  width: clamp(50px, 10vw, 150px);
+  width: clamp(50px);
 }
 
 .desktop-page-links li {
