@@ -29,7 +29,7 @@ const Header = () => {
 
          <ul className='desktop-page-links'>
             <li>
-            <Link to='#choreographers'>
+            <Link to='/artists'>
              Directors & Choreographers
             </Link>
           </li>
@@ -47,7 +47,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to='#choreographers'>
+            <Link to='/artists'>
              Directors & Choreographers
             </Link>
           </li>
