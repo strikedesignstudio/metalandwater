@@ -7,7 +7,7 @@ import ArtistListing from '../components/artistListing'
 const Artists = ({ data }) => {
   const artists = data.contentfulArtistsPage.artistListing
   return (
-    <Layout>
+    <Layout className='artists-page'>
       <div className='artists-page'>
         {artists.map((artist) => (
           <ArtistListing artist={artist} key={artist.id} />
