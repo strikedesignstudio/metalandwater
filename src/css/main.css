@@ -651,7 +651,7 @@ Artists Page
 }
 
 .artists-page {
-  padding-top: 250px;
+    padding: 100px 40px 40px 40px;
 }
 
 .artist-listing-item {
