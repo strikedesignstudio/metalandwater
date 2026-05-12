@@ -501,7 +501,8 @@ About Page
 .about-text {
   padding: 1.5rem;
   padding-top: 50px;
-  width: 75%;
+  width: 800px;
+  margin:auto;
 }
 
 .about-text p {
