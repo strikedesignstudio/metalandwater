@@ -556,6 +556,10 @@ About Page
   fill: black;
 }
 
+.artists-page-padding {
+  padding:100px 40px;
+}
+
 
 @media screen and (max-width: 700px) {
   .about-text {
