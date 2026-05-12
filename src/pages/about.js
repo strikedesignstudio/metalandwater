@@ -6,7 +6,7 @@ import Seo from '../components/seo'
 const About = ({ data }) => {
   const { aboutText } = data.contentfulAboutPage
   return (
-    <Layout>
+    <Layout className='about-page'>
       <div
         className='about-text'
         dangerouslySetInnerHTML={{ __html: aboutText?.childMarkdownRemark?.html }}
