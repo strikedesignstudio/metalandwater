@@ -654,8 +654,7 @@ Artists Page
 }
 
 .artist-listing-item:hover {
-  color: #fff;
-  background: #000;
+  color: black;
   opacity: 1;
   transition: all var(--fast-transition);
 }
