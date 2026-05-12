@@ -187,6 +187,7 @@ const HomeSlider = () => {
             </video>
 
             {/* PNG overlay (sits between video and credit via z-index in CSS) */}
+            <div className="logo-overlay" />
             <div className="image-overlay" />
 
             {/* Credit */}
