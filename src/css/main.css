@@ -306,7 +306,7 @@ FOOTER
 
 footer {
   font-weight: 300;
-  display: flex;
+  display: none;
   width: calc(100% - 3rem);
   justify-content: space-between;
   margin: 1.5rem;
