@@ -26,35 +26,31 @@ const Header = () => {
               />
             </svg>
           </Link>
-
-         <ul className='desktop-page-links'>
+          <ul className='desktop-page-links'>
             <li>
-            <Link to='/artists'>
-             Directors & Choreographers
-            </Link>
-          </li>
-          <li>
-            <Link to='/about'>
-              About
-            </Link>
-          </li>
-          </ul> 
+              <Link to='/artists'>Directors & Choreographers</Link>
+            </li>
+            <li>
+              <Link to='/about'>About</Link>
+            </li>
+          </ul>
+          <button
+            className='mobile-menu-toggle'
+            onClick={toggleSidebar}
+            aria-label='Toggle menu'
+          >
+            {isOpen ? '×' : '+'}
+          </button>
         </div>
         <ul className={`mobile-page-links ${isOpen ? 'show' : 'hide'}`}>
           <li>
-            <Link to=''>
-              Metal & Water
-            </Link>
+            <Link to=''>Metal & Water</Link>
           </li>
           <li>
-            <Link to='/artists'>
-             Directors & Choreographers
-            </Link>
+            <Link to='/artists'>Directors & Choreographers</Link>
           </li>
           <li>
-            <Link to='/about'>
-              About
-            </Link>
+            <Link to='/about'>About</Link>
           </li>
         </ul>
       </nav>
