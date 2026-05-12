@@ -161,6 +161,22 @@ width: clamp(30px, 5vw, 10vw);
   text-align: right;
 }
 
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+@media (max-width: 600px) {
+  .mobile-menu-toggle {
+    display: block;
+  }
+}
+
 #nav-icon {
   width: 60px;
   height: 45px;
