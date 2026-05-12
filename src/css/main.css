@@ -671,8 +671,6 @@ Artists Page
 
 .artist-listing-item:hover {
   color: black;
-  opacity: 1;
-  transition: all var(--fast-transition);
 }
 
 .artist-tooltip {
