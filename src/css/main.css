@@ -528,6 +528,21 @@ About Page
     margin: 20px 0;
 }
 
+.about-page header {
+  color: black;
+}
+
+.about-page .navbar a,
+.about-page .desktop-page-links a,
+.about-page .mobile-page-links a {
+  color: black;
+}
+
+.about-page .nav-logo path {
+  fill: black;
+}
+
+
 @media screen and (max-width: 700px) {
   .about-text {
     width: 100%;
