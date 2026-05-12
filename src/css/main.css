@@ -174,7 +174,11 @@ width: clamp(30px, 5vw, 10vw);
 @media (max-width: 600px) {
   .mobile-menu-toggle {
     display: block;
+    float:right;
   }
+  .navbar {
+  display:block;
+}
 }
 
 #nav-icon {
