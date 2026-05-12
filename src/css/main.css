@@ -52,20 +52,6 @@ html {
   color: #000;
 }
 
-body {
-  cursor: url('../images/cursor-outline.png'), auto;
-}
-
-a,
-button {
-  cursor: url('../images/cursor-outline.png'), auto;
-}
-
-a:active,
-button:active {
-  cursor: url('../images/cursor-filled.png'), auto;
-}
-
 @media screen and (max-width: 600px) {
   html {
     font-size: 12px;
