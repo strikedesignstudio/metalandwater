@@ -715,7 +715,7 @@ Artists Page
     -webkit-text-stroke-color: var(--black);
     padding-top: 5px;
     padding-bottom: 5px;
-    font-size: 4.5em;
+    font-size: 4em;
     font-weight: 500;
     line-height: 1em;
     transition: color .2s;
