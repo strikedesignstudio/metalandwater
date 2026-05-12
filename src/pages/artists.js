@@ -8,7 +8,7 @@ const Artists = ({ data }) => {
   const artists = data.contentfulArtistsPage.artistListing
   return (
     <Layout className='artists-page'>
-      <div className='artists-page'>
+      <div className='artists-page-padding'>
         {artists.map((artist) => (
           <ArtistListing artist={artist} key={artist.id} />
         ))}
