@@ -4,25 +4,35 @@ import Layout from '../components/layout'
 import Seo from '../components/seo'
 
 const Contact = ({ data }) => {
-  const { contactText } = data.contentfulContactPage
+  const { email, instagram } = data.contentfulContact
   return (
     <Layout>
-      <div
-        className='contact-text'
-        dangerouslySetInnerHTML={{ __html: contactText?.childMarkdownRemark?.html }}
-      />
+      <div className='contact-page'>
+        {email && (
+          <a href={`mailto:${email}`} className='contact-email'>
+            {email}
+          </a>
+        )}
+        {instagram && (
+          
+            href={instagram}
+            target='_blank'
+            rel='noreferrer'
+            className='contact-instagram'
+          >
+            Instagram
+          </a>
+        )}
+      </div>
     </Layout>
   )
 }
 
 export const query = graphql`
   query {
-    contentfulContactPage {
-      contactText {
-        childMarkdownRemark {
-          html
-        }
-      }
+    contentfulContact {
+      email
+      instagram
     }
   }
 `
