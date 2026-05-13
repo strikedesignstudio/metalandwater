@@ -602,6 +602,10 @@ width:800px;
   padding:100px 20px;
 }
 
+.contact-page-padding a {
+display:block;
+}
+
 
 @media screen and (max-width: 700px) {
   .about-text {
