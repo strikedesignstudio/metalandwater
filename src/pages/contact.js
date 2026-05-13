@@ -30,7 +30,7 @@ const Contact = ({ data }) => {
 
 export const query = graphql`
   query {
-    contentfulContact {
+    contentfulContactPage {
       email
       instagram
     }
