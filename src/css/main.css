@@ -582,6 +582,20 @@ About Page
   padding:100px 40px;
 }
 
+.contact-page header {
+  color: black;
+}
+
+.contact-page .navbar a,
+.contact-page .desktop-page-links a,
+.contact-page .mobile-page-links a {
+  color: black;
+}
+
+.contact-page .nav-logo path {
+  fill: black;
+}
+
 
 @media screen and (max-width: 700px) {
   .about-text {
