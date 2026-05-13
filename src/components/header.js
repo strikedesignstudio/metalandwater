@@ -33,6 +33,9 @@ const Header = () => {
             <li>
               <Link to='/about'>About</Link>
             </li>
+              <li>
+            <Link to='/about'>contact</Link>
+          </li>
           </ul>
           <button
             className='mobile-menu-toggle'
@@ -51,6 +54,9 @@ const Header = () => {
           </li>
           <li>
             <Link to='/about'>About</Link>
+          </li>
+          <li>
+            <Link to='/about'>contact</Link>
           </li>
         </ul>
       </nav>
