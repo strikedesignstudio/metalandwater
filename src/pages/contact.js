@@ -14,7 +14,7 @@ const Contact = ({ data }) => {
           </a>
         )}
         {instagram && (
-          
+          <a 
             href={instagram}
             target='_blank'
             rel='noreferrer'
