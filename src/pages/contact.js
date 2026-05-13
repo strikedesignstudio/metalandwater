@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 import Seo from '../components/seo'
 
 const Contact = ({ data }) => {
-  const { email, instagram } = data.contentfulContact
+  const { email, instagram } = data.contentfulContactPage
   return (
     <Layout>
       <div className='contact-page'>
