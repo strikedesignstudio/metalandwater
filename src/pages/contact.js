@@ -6,8 +6,8 @@ import Seo from '../components/seo'
 const Contact = ({ data }) => {
   const { email, instagram } = data.contentfulContactPage
   return (
-    <Layout>
-      <div className='contact-page'>
+    <Layout className='contact-page'>
+      <div className='contact-page-padding'>
         {email && (
           <a href={`mailto:${email}`} className='contact-email'>
             {email}
