@@ -34,7 +34,7 @@ const Header = () => {
               <Link to='/about'>About</Link>
             </li>
               <li>
-            <Link to='/about'>contact</Link>
+            <Link to='/about'>Contact</Link>
           </li>
           </ul>
           <button
@@ -56,7 +56,7 @@ const Header = () => {
             <Link to='/about'>About</Link>
           </li>
           <li>
-            <Link to='/about'>contact</Link>
+            <Link to='/about'>Contact</Link>
           </li>
         </ul>
       </nav>
