@@ -69,7 +69,7 @@ button:active {
 a.bottomtuck {
     position: fixed;
     bottom: 45px;
-    right: 33%;
+    right: 20%;
 }
 
 @media screen and (max-width: 600px) {
