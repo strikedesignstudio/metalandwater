@@ -66,6 +66,12 @@ button:active {
   cursor: url('../images/cursor-filled.png'), auto;
 }
 
+a.bottomtuck {
+    position: fixed;
+    bottom: 45px;
+    right: 80px;
+}
+
 @media screen and (max-width: 600px) {
   html {
     font-size: 12px;
