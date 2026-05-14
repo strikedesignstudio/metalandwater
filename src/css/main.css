@@ -53,17 +53,17 @@ html {
 }
 
 body {
-  cursor: url('../images/cursor-outline.png'), auto;
+  cursor: url('../images/arrow.png'), auto;
 }
 
 a,
 button {
-  cursor: url('../images/cursor-outline.png'), auto;
+  cursor: url('../images/arrow.png'), auto;
 }
 
 a:active,
 button:active {
-  cursor: url('../images/cursor-filled.png'), auto;
+  cursor: url('../images/arrow.png'), auto;
 }
 
 a.bottomtuck {
