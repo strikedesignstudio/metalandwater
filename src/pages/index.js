@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 import HomeSlider from '../components/homeSlider'
 
 // Drop your first-frame JPEG URL here
-const PLACEHOLDER = 'https://your-cdn.com/first-frame.jpg'
+const PLACEHOLDER = '../images/placeholder.jpg'
 
 const Index = () => {
   const [videoReady, setVideoReady] = useState(false)
