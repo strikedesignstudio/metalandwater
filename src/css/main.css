@@ -497,7 +497,7 @@ position: absolute !important;
 }
 
 .home-credit {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   left: 10px;
   z-index: 100;
