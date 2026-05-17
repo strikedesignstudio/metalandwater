@@ -178,16 +178,17 @@ const HomeSlider = ({ placeholder, onReady }) => {
             }}
           >
             <video
-              ref={(el) => (videoRefs.current[i] = el)}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              muted
-              playsInline
-              loop
-              preload={i === 0 ? 'auto' : 'none'}
-              onPlaying={i === 0 ? handleFirstPlaying : undefined}
-            >
-              <source src={s.url} type={s.type} />
-            </video>
+  ref={(el) => (videoRefs.current[i] = el)}
+  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+  muted
+  playsInline
+  loop
+  autoPlay={i === 0}
+  preload={i === 0 ? 'auto' : 'none'}
+  onPlaying={i === 0 ? handleFirstPlaying : undefined}
+>
+  <source src={s.url} type={s.type} />
+</video>
             <div className="image-overlay" />
             <p className="home-credit">{s.credit}</p>
           </div>
