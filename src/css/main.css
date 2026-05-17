@@ -409,6 +409,7 @@ HOME
 .hero-video-container {
   position: relative;
   background: black;
+  background-image:  url('../images/placeholder.jpg');
 }
 
 .home-slider-container button {
