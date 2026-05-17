@@ -47,7 +47,7 @@ const Header = () => {
         </div>
         <ul className={`mobile-page-links ${isOpen ? 'show' : 'hide'}`}>
           <li>
-            <Link to=''>Metal & Water</Link>
+            <Link to='/'>Home</Link>
           </li>
           <li>
             <Link to='/about'>About</Link>
