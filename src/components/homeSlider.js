@@ -49,19 +49,37 @@ const HomeSlider = ({ onReady }) => {
   const fadeTimerRef  = useRef(null)
   const readyFiredRef = useRef(false)
 
-  // Boot: play first video only
+  // Boot: play first video as aggressively as possible
   useEffect(() => {
     const v = videoRefs.current[0]
     if (!v) return
-    const attempt = () => {
-      v.currentTime = 0
-      v.play().catch(() => {
-        const resume = () => { v.play().catch(() => {}); document.removeEventListener('click', resume) }
-        document.addEventListener('click', resume, { once: true })
-      })
+
+    const tryPlay = () => {
+      const p = v.play()
+      if (p !== undefined) {
+        p.catch(() => {
+          // Last resort: wait for a user gesture then retry
+          const onGesture = () => {
+            v.play().catch(() => {})
+            document.removeEventListener('touchstart', onGesture)
+            document.removeEventListener('click', onGesture)
+          }
+          document.addEventListener('touchstart', onGesture, { once: true })
+          document.addEventListener('click', onGesture, { once: true })
+        })
+      }
     }
-    const t = setTimeout(attempt, 150)
-    return () => clearTimeout(t)
+
+    // If already buffered enough, play immediately
+    if (v.readyState >= 3) {
+      tryPlay()
+    } else {
+      // Otherwise wait for canplay — fires as soon as the browser
+      // has enough data to start, without waiting for full load
+      v.addEventListener('canplay', tryPlay, { once: true })
+    }
+
+    return () => v.removeEventListener('canplay', tryPlay)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slides.length])
 
