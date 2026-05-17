@@ -50,10 +50,10 @@ const Header = () => {
             <Link to=''>Metal & Water</Link>
           </li>
           <li>
-            <Link to='/artists'>Directors & Choreographers</Link>
+            <Link to='/about'>About</Link>
           </li>
           <li>
-            <Link to='/about'>About</Link>
+            <Link to='/artists'>Directors & Choreographers</Link>
           </li>
           <li>
             <Link to='/contact'>Contact</Link>
