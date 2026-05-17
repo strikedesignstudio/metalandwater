@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import Seo from '../components/seo'
 import Layout from '../components/layout'
 import HomeSlider from '../components/homeSlider'
-
-// Drop your first-frame JPEG URL here
-const PLACEHOLDER = '../images/placeholder.jpg'
+import placeholder from '../images/placeholder.jpg'
 
 const Index = () => {
   const [videoReady, setVideoReady] = useState(false)
@@ -12,7 +10,7 @@ const Index = () => {
   return (
     <Layout videoReady={videoReady}>
       <HomeSlider
-        placeholder={PLACEHOLDER}
+        placeholder={placeholder}
         onReady={() => setVideoReady(true)}
       />
     </Layout>
