@@ -131,26 +131,40 @@ const HomeSlider = ({ placeholder, onReady }) => {
       {placeholder && (
         <div
           style={{
-            position:      'absolute',
-            inset:          0,
-            zIndex:         20,
-            opacity:        videoReady ? 0 : 1,
-            transition:    `opacity ${FADE_MS}ms ease`,
-            pointerEvents: 'none',
+            position:           'absolute',
+            inset:               0,
+            zIndex:              20,
+            opacity:             videoReady ? 0 : 1,
+            transition:         `opacity ${FADE_MS}ms ease`,
+            pointerEvents:      'none',
+            backgroundImage:    `url(${placeholder})`,
+            backgroundSize:     'cover',
+            backgroundPosition: 'center',
           }}
-        >
-          <img
-            src={placeholder}
-            alt=""
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          />
-        </div>
+        />
       )}
 
       {/* Next arrow */}
       <button
         onClick={advance}
         aria-label="Next video"
+        style={{
+          position:       'absolute',
+          bottom:         '2rem',
+          right:          '2rem',
+          zIndex:         30,
+          display:        'flex',
+          alignItems:     'center',
+          justifyContent: 'center',
+          width:          '48px',
+          height:         '48px',
+          background:     'transparent',
+          border:         '1.5px solid rgba(255,255,255,0.6)',
+          borderRadius:   '50%',
+          cursor:         'pointer',
+          transition:     'opacity 0.2s ease',
+          opacity:         0.7,
+        }}
         onMouseEnter={e => e.currentTarget.style.opacity = 1}
         onMouseLeave={e => e.currentTarget.style.opacity = 0.7}
       >
@@ -178,17 +192,16 @@ const HomeSlider = ({ placeholder, onReady }) => {
             }}
           >
             <video
-  ref={(el) => (videoRefs.current[i] = el)}
-  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-  muted
-  playsInline
-  loop
-  autoPlay={i === 0}
-  preload={i === 0 ? 'auto' : 'none'}
-  onPlaying={i === 0 ? handleFirstPlaying : undefined}
->
-  <source src={s.url} type={s.type} />
-</video>
+              ref={(el) => (videoRefs.current[i] = el)}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              muted
+              playsInline
+              loop
+              preload={i === 0 ? 'auto' : 'none'}
+              onPlaying={i === 0 ? handleFirstPlaying : undefined}
+            >
+              <source src={s.url} type={s.type} />
+            </video>
             <div className="image-overlay" />
             <p className="home-credit">{s.credit}</p>
           </div>
