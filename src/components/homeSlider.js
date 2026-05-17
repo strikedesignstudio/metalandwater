@@ -4,10 +4,7 @@ import useWindowSize from '../utils/useWindowSize'
 
 const FADE_MS = 900
 
-// Props:
-//   placeholder : URL of a JPEG shown while the first video loads
-//   onReady     : callback fired once the first video starts playing
-const HomeSlider = ({ placeholder, onReady }) => {
+const HomeSlider = ({ onReady }) => {
   const data = useStaticQuery(graphql`
     query {
       contentfulHomePage {
@@ -45,7 +42,6 @@ const HomeSlider = ({ placeholder, onReady }) => {
 
   const [current,      setCurrent]      = useState(0)
   const [fadingFrom,   setFadingFrom]   = useState(null)
-  const [videoReady,   setVideoReady]   = useState(false)
   const [nextUnlocked, setNextUnlocked] = useState(false)
 
   const videoRefs     = useRef([])
@@ -80,11 +76,10 @@ const HomeSlider = ({ placeholder, onReady }) => {
     }
   }, [current, nextUnlocked, slides.length])
 
-  // First video starts playing: reveal it, unlock next preload, notify parent
+  // First video starts playing: unlock next preload, notify parent
   const handleFirstPlaying = useCallback(() => {
     if (readyFiredRef.current) return
     readyFiredRef.current = true
-    setVideoReady(true)
     setNextUnlocked(true)
     onReady?.()
   }, [onReady])
@@ -127,27 +122,27 @@ const HomeSlider = ({ placeholder, onReady }) => {
         height: isMobile ? `${height}px` : '100vh',
       }}
     >
-      {/* Placeholder JPEG — covers everything until first video plays */}
-      {placeholder && (
-        <div
-          style={{
-            position:           'absolute',
-            inset:               0,
-            zIndex:              20,
-            opacity:             videoReady ? 0 : 1,
-            transition:         `opacity ${FADE_MS}ms ease`,
-            pointerEvents:      'none',
-            backgroundImage:    `url(${placeholder})`,
-            backgroundSize:     'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-      )}
-
       {/* Next arrow */}
       <button
         onClick={advance}
         aria-label="Next video"
+        style={{
+          position:       'absolute',
+          bottom:         '2rem',
+          right:          '2rem',
+          zIndex:         30,
+          display:        'flex',
+          alignItems:     'center',
+          justifyContent: 'center',
+          width:          '48px',
+          height:         '48px',
+          background:     'transparent',
+          border:         '1.5px solid rgba(255,255,255,0.6)',
+          borderRadius:   '50%',
+          cursor:         'pointer',
+          transition:     'opacity 0.2s ease',
+          opacity:         0.7,
+        }}
         onMouseEnter={e => e.currentTarget.style.opacity = 1}
         onMouseLeave={e => e.currentTarget.style.opacity = 0.7}
       >
@@ -180,6 +175,7 @@ const HomeSlider = ({ placeholder, onReady }) => {
               muted
               playsInline
               loop
+              autoPlay={i === 0}
               preload={i === 0 ? 'auto' : 'none'}
               onPlaying={i === 0 ? handleFirstPlaying : undefined}
             >
@@ -195,4 +191,3 @@ const HomeSlider = ({ placeholder, onReady }) => {
 }
 
 export default HomeSlider
-
