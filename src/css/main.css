@@ -84,10 +84,10 @@ a.bottomtuck {
   scroll-snap-align: start;
   position: relative;
   overflow: hidden;
+  display:flex;
 }
 
 .contact-page {
-    padding: 100px 40px;
     width: 800px;
     margin: auto;
     color: white;
