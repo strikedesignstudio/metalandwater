@@ -657,6 +657,7 @@ About Page
   width: 800px;
   margin:auto;
   color:white;
+  transform: translateY(-25%);
 }
 
 .about-text p {
