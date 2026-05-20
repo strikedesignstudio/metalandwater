@@ -1,30 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './header'
 import { Script } from 'gatsby'
 
 const Layout = ({ children, className }) => {
+  const [onHome, setOnHome] = useState(true)
+
+  useEffect(() => {
+    const homeSection = document.getElementById('home')
+    if (!homeSection) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setOnHome(entry.isIntersecting),
+      { threshold: 0.5 }
+    )
+
+    observer.observe(homeSection)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div className={className} style={{ position: 'relative' }}>
-      <div
-        style={{
-          position: 'fixed',
-          top:       0,
-          left:      0,
-          right:     0,
-          zIndex:    100,
-        }}
-      >
-        <Header />
+    <div className={`site-wrapper${className ? ` ${className}` : ''}`}>
+      <div className={`header-wrapper${onHome ? '' : ' header-dark'}`}>
+        <Header onHome={onHome} />
       </div>
 
-      <main
-        style={{
-          height:         '100vh',
-          overflowY:      'scroll',
-          scrollSnapType: 'y mandatory',
-          scrollBehavior: 'smooth',
-        }}
-      >
+      <main className="site-main">
         {children}
       </main>
 
