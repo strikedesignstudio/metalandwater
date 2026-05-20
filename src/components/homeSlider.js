@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import useWindowSize from '../utils/useWindowSize'
 
 const FADE_MS = 900
 
@@ -25,8 +24,6 @@ const HomeSlider = ({ onReady }) => {
   `)
 
   const raw = data?.contentfulHomePage?.carouselImages || []
-  const { width, height } = useWindowSize()
-  const isMobile = width < 601
 
   const slides = raw
     .map((item) => {
@@ -49,7 +46,7 @@ const HomeSlider = ({ onReady }) => {
   const fadeTimerRef  = useRef(null)
   const readyFiredRef = useRef(false)
 
-  // Boot: play first video as aggressively as possible
+  // Boot: play first video as soon as it has enough data
   useEffect(() => {
     const v = videoRefs.current[0]
     if (!v) return
@@ -58,7 +55,6 @@ const HomeSlider = ({ onReady }) => {
       const p = v.play()
       if (p !== undefined) {
         p.catch(() => {
-          // Last resort: wait for a user gesture then retry
           const onGesture = () => {
             v.play().catch(() => {})
             document.removeEventListener('touchstart', onGesture)
@@ -70,12 +66,9 @@ const HomeSlider = ({ onReady }) => {
       }
     }
 
-    // If already buffered enough, play immediately
     if (v.readyState >= 3) {
       tryPlay()
     } else {
-      // Otherwise wait for canplay — fires as soon as the browser
-      // has enough data to start, without waiting for full load
       v.addEventListener('canplay', tryPlay, { once: true })
     }
 
@@ -83,7 +76,7 @@ const HomeSlider = ({ onReady }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slides.length])
 
-  // Preload next video — only after first has started playing
+  // Preload next video only after first has started playing
   useEffect(() => {
     if (!nextUnlocked || !slides.length) return
     const nextIdx   = (current + 1) % slides.length
@@ -94,7 +87,7 @@ const HomeSlider = ({ onReady }) => {
     }
   }, [current, nextUnlocked, slides.length])
 
-  // First video starts playing: unlock next preload, notify parent
+  // First video starts playing
   const handleFirstPlaying = useCallback(() => {
     if (readyFiredRef.current) return
     readyFiredRef.current = true
@@ -131,28 +124,20 @@ const HomeSlider = ({ onReady }) => {
   useEffect(() => () => clearTimeout(fadeTimerRef.current), [])
 
   return (
-    <div
-      className="home-slider-container"
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-        background: '#000',
-        height: isMobile ? `${height}px` : '100vh',
-      }}
-    >
+    <div className="home-slider-container">
+
       {/* Next arrow */}
       <button
+        className="slider-next-btn"
         onClick={advance}
         aria-label="Next video"
-        onMouseEnter={e => e.currentTarget.style.opacity = 1}
-        onMouseLeave={e => e.currentTarget.style.opacity = 0.7}
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <polyline points="6,3 12,9 6,15" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 
-      {/* Slides */}
+      {/* Slides — opacity/zIndex must stay inline as they change per-slide */}
       {slides.map((s, i) => {
         const isActive    = i === current
         const isFadingOut = i === fadingFrom
@@ -162,17 +147,12 @@ const HomeSlider = ({ onReady }) => {
         return (
           <div
             key={s.id}
-            style={{
-              position:   'absolute',
-              inset:       0,
-              opacity,
-              zIndex,
-              transition: `opacity ${FADE_MS}ms ease`,
-            }}
+            className="slider-slide"
+            style={{ opacity, zIndex }}
           >
             <video
               ref={(el) => (videoRefs.current[i] = el)}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              className="home-slide-image"
               muted
               playsInline
               loop
