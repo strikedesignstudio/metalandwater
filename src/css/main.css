@@ -93,6 +93,10 @@ a.bottomtuck {
     color: white;
 }
 
+.contact-page a {
+display:block;
+}
+
 /*
 ==========
 LAYOUT
