@@ -836,6 +836,10 @@ Artists Page
   padding-top: 250px;
 }
 
+.artists-page {
+    padding: 100px 40px;
+}
+
 .artist-listing-item {
   transition: all var(--fast-transition);
     width: 100%;
@@ -844,9 +848,9 @@ Artists Page
     -webkit-text-stroke-color: var(--black);
     padding-top: 5px;
     padding-bottom: 5px;
-    font-size: 4.5em;
+    font-size: 4em;
     font-weight: 500;
-    line-height: 1em;
+    line-height: 0.9em;
     transition: color .2s;
     display: block;
 }
