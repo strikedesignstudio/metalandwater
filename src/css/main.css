@@ -86,6 +86,93 @@ a.bottomtuck {
   overflow: hidden;
 }
 
+/*
+==========
+LAYOUT
+==========
+*/
+
+.site-wrapper {
+  position: relative;
+}
+
+.header-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.header-wrapper.header-dark {
+  color: black;
+}
+
+.site-main {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/*
+==========
+HEADER COLOUR SWITCHING
+==========
+*/
+
+/* SVG logo fill follows header colour */
+.nav-logo path {
+  fill: white;
+  transition: fill 0.3s ease;
+}
+
+.header--dark .nav-logo path {
+  fill: black;
+}
+
+/* Remove hardcoded white from mobile toggle so it inherits */
+.mobile-menu-toggle {
+  color: inherit;
+}
+
+/*
+==========
+SLIDER
+==========
+*/
+
+.slider-slide {
+  position: absolute;
+  inset: 0;
+  transition: opacity 900ms ease;
+}
+
+.slider-next-btn {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 40px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.slider-next-btn:hover {
+  opacity: 1;
+}
+
 @media screen and (max-width: 600px) {
   html {
     font-size: 12px;
