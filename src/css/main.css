@@ -836,13 +836,10 @@ Artists Page
   padding-top: 250px;
 }
 
-.artists-page {
-}
-
 .artist-listing-item {
   transition: all var(--fast-transition);
     width: 100%;
-    color: var(--trans);
+    color: white;
     -webkit-text-stroke-width: .01px;
     -webkit-text-stroke-color: var(--black);
     padding-top: 5px;
@@ -855,7 +852,7 @@ Artists Page
 }
 
 .artist-listing-item:hover {
-  color: black;
+  color: grey;
 }
 
 .artist-tooltip {
