@@ -7,6 +7,12 @@
   font-style: normal;
 }
 
+.desktop-page-links a,
+.mobile-page-links a {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
 * {
   margin: 0;
   padding: 0;
