@@ -91,6 +91,8 @@ a.bottomtuck {
     width: 800px;
     margin: auto;
     color: white;
+  text-align: center;
+    padding-bottom: 50px;
 }
 
 .contact-page a {
