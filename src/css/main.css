@@ -86,6 +86,13 @@ a.bottomtuck {
   overflow: hidden;
 }
 
+.contact-page {
+    padding: 100px 40px;
+    width: 800px;
+    margin: auto;
+    color: white;
+}
+
 /*
 ==========
 LAYOUT
