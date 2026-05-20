@@ -164,7 +164,7 @@ SLIDER
   bottom: 0;
   right: 0;
   padding: 40px;
-  z-index: 200;
+  z-index: 1000;
   align-items: center;
   justify-content: center;
   width: 48px;
