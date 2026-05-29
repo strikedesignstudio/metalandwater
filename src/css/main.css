@@ -104,10 +104,6 @@ li.contacttuck {
     bottom: 40px;
     right: 100px;
 }
-
-#artists, #about, #contact {
-pointer-events: none;
-}
 /*
 ==========
 LAYOUT
