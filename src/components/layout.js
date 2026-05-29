@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from './header'
 import { Script } from 'gatsby'
 
-const Layout = ({ children, className }) => {
+const Layout = ({ children, className, onAdvance }) => {
   const [onHome, setOnHome] = useState(true)
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Layout = ({ children, className }) => {
   return (
     <div className={`site-wrapper${className ? ` ${className}` : ''}`}>
       <div className={`header-wrapper${onHome ? '' : ' header-dark'}`}>
-        <Header onHome={onHome} />
+        <Header onHome={onHome} onAdvance={onAdvance} />
       </div>
 
       <main className="site-main">
