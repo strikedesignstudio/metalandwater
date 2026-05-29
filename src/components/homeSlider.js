@@ -1,9 +1,16 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useImperativeHandle,
+  forwardRef,
+} from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 
 const FADE_MS = 900
 
-const HomeSlider = ({ onReady }) => {
+const HomeSlider = forwardRef(({ onReady }, ref) => {
   const data = useStaticQuery(graphql`
     query {
       contentfulHomePage {
@@ -121,23 +128,13 @@ const HomeSlider = ({ onReady }) => {
     }, FADE_MS + 50)
   }, [current, slides.length])
 
+  // Expose advance to parent via ref
+  useImperativeHandle(ref, () => ({ advance }), [advance])
+
   useEffect(() => () => clearTimeout(fadeTimerRef.current), [])
 
   return (
     <div className="home-slider-container">
-
-      {/* Next arrow */}
-      <button
-        className="slider-next-btn"
-        onClick={advance}
-        aria-label="Next video"
-      >
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polyline points="6,3 12,9 6,15" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
-
-      {/* Slides — opacity/zIndex must stay inline as they change per-slide */}
       {slides.map((s, i) => {
         const isActive    = i === current
         const isFadingOut = i === fadingFrom
@@ -169,6 +166,6 @@ const HomeSlider = ({ onReady }) => {
       })}
     </div>
   )
-}
+})
 
 export default HomeSlider
