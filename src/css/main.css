@@ -525,16 +525,6 @@ HOME
   background-image:  url('../images/placeholder.jpg');
 }
 
-.home-slider-container button {
-    z-index: 200;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 55px;
-    background-color: transparent;
-    border: none;
-}
-
 .hero-container iframe {
   position: absolute;
   top: 50%;
