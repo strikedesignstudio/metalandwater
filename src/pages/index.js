@@ -1,25 +1,26 @@
-import React, { useState } from 'react'
+import React, { useRef } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import HomeSlider from '../components/homeSlider'
 import Seo from '../components/seo'
 
 const Index = ({ data }) => {
-  const [videoReady, setVideoReady] = useState(false)
+  const sliderRef = useRef()
 
   const aboutText = data.contentfulAboutPage?.aboutText
   const artists   = data.allContentfulArtist?.nodes || []
   const contact   = data.contentfulContactPage
 
   return (
-    <Layout videoReady={videoReady}>
+    <Layout onAdvance={() => sliderRef.current?.advance()}>
 
-      {/* ── Home ── */}
       <section id="home" className="page-section">
-        <HomeSlider onReady={() => setVideoReady(true)} />
+        <HomeSlider
+          ref={sliderRef}
+          onReady={() => {}}
+        />
       </section>
 
-      {/* ── Artists ── */}
       <section id="artists" className="page-section">
         <div className="artists-page">
           {artists.map((artist) => (
@@ -36,7 +37,6 @@ const Index = ({ data }) => {
         </div>
       </section>
 
-      {/* ── About ── */}
       <section id="about" className="page-section">
         <div
           className="about-text"
@@ -44,7 +44,6 @@ const Index = ({ data }) => {
         />
       </section>
 
-      {/* ── Contact ── */}
       <section id="contact" className="page-section">
         <div className="contact-page">
           {contact?.email && (
@@ -78,7 +77,7 @@ export const query = graphql`
         }
       }
     }
-    allContentfulArtist(sort: { fields: [artist], order: ASC }) {
+    allContentfulArtist(sort: { artist: ASC }) {
       nodes {
         id
         artist
