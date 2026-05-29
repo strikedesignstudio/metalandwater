@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Header = ({ onHome = true }) => {
+const Header = ({ onHome = true, onAdvance }) => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleSidebar = () => setIsOpen(!isOpen)
   const closeMenu     = () => setIsOpen(false)
@@ -28,8 +28,21 @@ const Header = ({ onHome = true }) => {
           <ul className="desktop-page-links">
             <li><a href="#artists">Directors & Choreographers</a></li>
             <li><a href="#about">About</a></li>
-            <li className="contacttuck"><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Contact</a></li>
           </ul>
+
+          {/* Slider advance arrow — lives in the nav so it's always on top */}
+          {onAdvance && (
+            <button
+              className="slider-next-btn"
+              onClick={onAdvance}
+              aria-label="Next video"
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polyline points="6,3 12,9 6,15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          )}
 
           <button
             className="mobile-menu-toggle"
