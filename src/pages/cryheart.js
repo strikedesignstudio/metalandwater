@@ -31,8 +31,8 @@ const CryHeartPage = () => (
       Partners in the Production Circle help realise it in full, are credited on the production, and are invited into the rehearsal room and to the premiere.
     </p>
     <p>Partnership from £1,000.</p>
-    <p>Nancy May Roberts, nancy@metalwater.co Ben Totty, ben@boxartistmanagement.com</p>
-    <p>Holly Blakey · BOX Artist Management · Metal & Water</p>
+    <p>Nancy May Roberts, nancy@metalwater.co</p>
+    <p>Ben Totty, ben@boxartistmanagement.com</p>
   </div>
   </div>
   </Layout>
