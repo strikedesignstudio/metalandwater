@@ -5,17 +5,18 @@ const CryHeartPage = () => (
   <Layout>
   <style>{`
       body { background-color: pink !important; margin: 0; }
+      h1 {text-transform:uppercase;}
   .centerheader {
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: center; /* horizontal */
-    align-items: center;     /* vertical */
+    justify-content: center;
+    align-items: center; 
   }
   .centerdiv {
     max-width: 40rem;
     padding: 2rem;
-    text-align: center;      /* optional: centers the text itself */
+    text-align: center;
   }
     `}</style>
   <div className="centerheader">
