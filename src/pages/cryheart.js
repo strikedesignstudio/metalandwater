@@ -3,7 +3,9 @@ import Layout from "../components/layout"
 
 const AboutPage = () => (
   <Layout>
-  <style>body{background-color:pink !important;}</style>
+  <style>{`
+      body { background-color: pink !important; }
+    `}</style>
     <h1>Cry, Heart</h1>
     <p>A new work by Holly Blakey</p>
     <p>You have just seen the first glimpse.</p>
