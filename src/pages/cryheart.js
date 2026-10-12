@@ -4,9 +4,19 @@ import Layout from "../components/layout"
 const CryHeartPage = () => (
   <Layout>
   <style>{`
-      body { background-color: pink !important; }
-      .centerheader {width:100vw;height:100vh;display:flex;}
-      .centerdiv {display:center;}
+      body { background-color: pink !important; margin: 0; }
+  .centerheader {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* horizontal */
+    align-items: center;     /* vertical */
+  }
+  .centerdiv {
+    max-width: 40rem;
+    padding: 2rem;
+    text-align: center;      /* optional: centers the text itself */
+  }
     `}</style>
   <div class="centerheader">
   <div class="centerdiv">
