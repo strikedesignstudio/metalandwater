@@ -1,7 +1,7 @@
 import * as React from "react"
 import Layout from "../components/layout"
 
-const AboutPage = () => (
+const CryHeartPage = () => (
   <Layout>
   <style>{`
       body { background-color: pink !important; }
@@ -12,5 +12,5 @@ const AboutPage = () => (
     <p>World premiere at the Queen Elizabeth Hall, Southbank Centre, 24 to 26 March 2027.</p>
   </Layout>
 )
-export default AboutPage
+export default CryHeartPage
 export const Head = () => <title>Cry, Heart</title>
