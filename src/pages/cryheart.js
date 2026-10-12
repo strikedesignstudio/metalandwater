@@ -18,8 +18,8 @@ const CryHeartPage = () => (
     text-align: center;      /* optional: centers the text itself */
   }
     `}</style>
-  <div class="centerheader">
-  <div class="centerdiv">
+  <div className="centerheader">
+  <div className="centerdiv">
     <h1>Cry, Heart</h1>
     <p>A new work by Holly Blakey</p>
     <p>You have just seen the first glimpse.</p>
