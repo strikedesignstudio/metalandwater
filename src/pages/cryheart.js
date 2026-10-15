@@ -14,6 +14,7 @@ const CryHeartPage = () => (
     max-width: 40rem;
     padding: 2rem;
     text-align: center;
+    margin: 100px auto;
   }
     `}</style>
   <div className="centerheader">
