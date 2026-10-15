@@ -38,4 +38,9 @@ const CryHeartPage = () => (
   </Layout>
 )
 export default CryHeartPage
-export const Head = () => <title>Cry, Heart</title>
+export const Head = () => (
+  <>
+    <title>Cry, Heart</title>
+    <meta name="robots" content="noindex, nofollow" />
+  </>
+)
