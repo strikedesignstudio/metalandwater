@@ -8,10 +8,7 @@ const CryHeartPage = () => (
       h1 {text-transform:uppercase;}
   .centerheader {
     width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
+    height: auto;
   }
   .centerdiv {
     max-width: 40rem;
