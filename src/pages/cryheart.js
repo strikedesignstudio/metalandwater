@@ -16,6 +16,7 @@ const CryHeartPage = () => (
     text-align: center;
     margin: 100px auto;
   }
+  .arial { font-family: Arial, Helvetica, sans-serif; }
     `}</style>
   <div className="centerheader">
   <div className="centerdiv">
@@ -39,8 +40,8 @@ const CryHeartPage = () => (
     <p>Holly is one of the only women choreographers in the UK making work at this scale, and she does it as an independent artist, without a company building, a permanent ensemble or core public funding behind her. Every production is built from the ground up, and the people who stand behind it decide whether it happens at the scale it deserves.</p>
     <br />
     <b>PARTNERSHIP LEVELS</b>
-    <p>Supporting Partner, £1,000+. Supporter credit on Cry, Heart. Two tickets to the premiere at Queen Elizabeth Hall. Invitation to an open rehearsal. Post-show dinner reception and party. Updates from Holly as the work is made.</p>
-    <p>Producing Partner, £2,500+. Associate Producer credit on Cry, Heart. Four tickets to the premiere. Rehearsal visits and design presentations with Holly and the creative team. Post-show dinner reception and party. Priority booking across Holly Blakey, BOX and Metal & Water productions.</p>
+    <p>Supporting Partner, <span className="arial">£</span>1,000+. Supporter credit on Cry, Heart. Two tickets to the premiere at Queen Elizabeth Hall. Invitation to an open rehearsal. Post-show dinner reception and party. Updates from Holly as the work is made.</p>
+    <p>Producing Partner, <span className="arial">£</span>2,500+. Associate Producer credit on Cry, Heart. Four tickets to the premiere. Rehearsal visits and design presentations with Holly and the creative team. Post-show dinner reception and party. Priority booking across Holly Blakey, BOX and Metal & Water productions.</p>
     <p>All partners are acknowledged in the programme and on the Holly Blakey, BOX and Metal & Water websites and channels. Larger gifts are welcome and shaped with you directly.</p>
     <br />
     <b>JOIN US</b>
