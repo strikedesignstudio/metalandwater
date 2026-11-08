@@ -26,7 +26,7 @@ const Header = ({ onHome = true, onAdvance }) => {
           </a>
 
           <ul className="desktop-page-links">
-            <li><a href="#artists">Directors & Choreographers</a></li>
+            <!-- <li><a href="#artists">Directors & Choreographers</a></li>-->
             <li><a href="#about">About</a></li>
             <li className="contacttuck"><a href="#contact">Contact</a></li>
           </ul>
@@ -55,7 +55,7 @@ const Header = ({ onHome = true, onAdvance }) => {
 
         <ul className={`mobile-page-links ${isOpen ? 'show' : 'hide'}`}>
           <li><a href="#home"    onClick={closeMenu}>Metal & Water</a></li>
-          <li><a href="#artists" onClick={closeMenu}>Directors & Choreographers</a></li>
+          <!-- <li><a href="#artists" onClick={closeMenu}>Directors & Choreographers</a></li> -->
           <li><a href="#about"   onClick={closeMenu}>About</a></li>
           <li><a href="#contact" onClick={closeMenu}>Contact</a></li>
         </ul>
