@@ -26,7 +26,7 @@ const Header = ({ onHome = true, onAdvance }) => {
           </a>
 
           <ul className="desktop-page-links">
-            <!-- <li><a href="#artists">Directors & Choreographers</a></li>-->
+             {/* <li><a href="#artists">Directors & Choreographers</a></li> */}
             <li><a href="#about">About</a></li>
             <li className="contacttuck"><a href="#contact">Contact</a></li>
           </ul>
