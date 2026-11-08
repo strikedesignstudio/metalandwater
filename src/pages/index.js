@@ -21,7 +21,7 @@ const Index = ({ data }) => {
         />
       </section>
 
-      <section id="artists" className="page-section">
+      <!-- <section id="artists" className="page-section">
         <div className="artists-page">
           {artists.map((artist) => (
             <a
@@ -35,7 +35,7 @@ const Index = ({ data }) => {
             </a>
           ))}
         </div>
-      </section>
+      </section> -->
 
       <section id="about" className="page-section">
         <div
